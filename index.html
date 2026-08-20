@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Travel &amp; Event Matrix</title>
+<style>
+  :root {
+    --fg:        #ffffff;
+    --dim:       rgba(255,255,255,.55);
+    --faint:     rgba(255,255,255,.28);
+    --accent:    #4d9fff;
+    --rule:      rgba(255,255,255,.14);
+    --base:      26px;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html, body {
+    background: transparent;
+    color: var(--fg);
+    font-family: -apple-system, "Helvetica Neue", Roboto, sans-serif;
+    font-size: var(--base);
+    line-height: 1.25;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  body { padding: .6em .2em 1.4em; }
+
+  h1 {
+    font-size: .74em;
+    font-weight: 600;
+    letter-spacing: .22em;
+    text-transform: uppercase;
+    color: var(--accent);
+    padding-bottom: .5em;
+    margin-bottom: .9em;
+    border-bottom: 2px solid var(--rule);
+  }
+
+  .month {
+    font-size: .66em;
+    font-weight: 600;
+    letter-spacing: .2em;
+    text-transform: uppercase;
+    color: var(--dim);
+    margin: 1.5em 0 .55em;
+    display: flex;
+    align-items: center;
+    gap: .8em;
+    white-space: nowrap;
+  }
+  .month::after {
+    content: "";
+    height: 1px;
+    background: var(--rule);
+    flex: 1;
+  }
+  .month:first-of-type { margin-top: .2em; }
+
+  /* Departures-board grid: dates locked left, events flow right */
+  .row {
+    display: grid;
+    grid-template-columns: 4.6em 1fr;
+    gap: .9em;
+    padding: .42em 0;
+    align-items: baseline;
+  }
+
+  .date {
+    font-variant-numeric: tabular-nums;
+    font-weight: 600;
+    color: var(--fg);
+    text-align: right;
+    white-space: nowrap;
+    font-size: .92em;
+  }
+
+  /* Multi-day spans are the trips — the reason this board exists */
+  .row.multi .date { color: var(--accent); }
+  .row.multi .title { font-weight: 600; }
+
+  .ev + .ev { margin-top: .3em; }
+
+  .title { display: inline; }
+
+  .loc::before {
+    content: "·";
+    color: var(--faint);
+    margin: 0 .4em;
+  }
+  .loc { color: var(--dim); }
+
+  .who {
+    display: inline-block;
+    margin-left: .5em;
+    font-size: .68em;
+    letter-spacing: .06em;
+    text-transform: uppercase;
+    color: var(--faint);
+    vertical-align: .12em;
+  }
+
+  .empty { color: var(--dim); padding: 1.5em 0; }
+
+  footer {
+    margin-top: 1.8em;
+    padding-top: .7em;
+    border-top: 1px solid var(--rule);
+    font-size: .58em;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    color: var(--faint);
+  }
+</style>
+</head>
+<body>
+  <h1>Travel &amp; Event Matrix</h1>
+<h2 class="month">September</h2>
+<div class="row multi"><div class="date">24-26</div><div class="events"><div class="ev"><span class="title">USA Swimming Workshop, FBOD, and Golden Goggles</span><span class="who">USMS</span></div></div></div>
+<div class="row multi"><div class="date">24-27</div><div class="events"><div class="ev"><span class="title">USMS Relay and National Coaches Clinic</span><span class="who">USMS</span></div></div></div>
+<h2 class="month">October</h2>
+<div class="row"><div class="date">2</div><div class="events"><div class="ev"><span class="title">Liss' birthday</span><span class="who">Kelly</span></div><div class="ev"><span class="title">Natasha's birthday</span><span class="who">Kelly</span></div></div></div>
+<div class="row"><div class="date">12</div><div class="events"><div class="ev"><span class="title">Professional workday, kids off</span><span class="who">Hughes Family</span></div></div></div>
+<div class="row"><div class="date">21</div><div class="events"><div class="ev"><span class="title">Katie Mallory Birthday</span><span class="who">Hughes Family</span></div></div></div>
+<div class="row"><div class="date">31</div><div class="events"><div class="ev"><span class="title">Halloween</span><span class="who">USMS</span></div></div></div>
+<h2 class="month">November</h2>
+<div class="row multi"><div class="date">6-7</div><div class="events"><div class="ev"><span class="title">Lowry: Tampa Super Cup</span><span class="loc">Tampa, FL</span><span class="who">Lowry</span></div></div></div>
+  <footer>Updated Aug 20, 12:31 PM · edits go in the calendar</footer>
+</body>
+</html>
