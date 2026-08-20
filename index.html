@@ -11,7 +11,7 @@
     --faint:     rgba(255,255,255,.28);
     --accent:    #4d9fff;
     --rule:      rgba(255,255,255,.14);
-    --base:      40px;
+    --base:      26px;
   }
 
   * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -39,11 +39,11 @@
   }
 
   .month {
-    font-size: .66em;
-    font-weight: 600;
-    letter-spacing: .2em;
+    font-size: .78em;
+    font-weight: 700;
+    letter-spacing: .18em;
     text-transform: uppercase;
-    color: var(--dim);
+    color: var(--fg);
     margin: 1.5em 0 .55em;
     display: flex;
     align-items: center;
@@ -52,7 +52,7 @@
   }
   .month::after {
     content: "";
-    height: 1px;
+    height: 2px;
     background: var(--rule);
     flex: 1;
   }
@@ -69,7 +69,7 @@
 
   .date {
     font-variant-numeric: tabular-nums;
-    font-weight: 600;
+    font-weight: 700;
     color: var(--fg);
     text-align: right;
     white-space: nowrap;
