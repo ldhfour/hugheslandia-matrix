@@ -12,30 +12,30 @@
     display:flex;align-items:center;
   }
 
-  /* Everything scales off vh, which inside this iframe means
-     "percent of the DAKboard block height" — so the ticker
-     automatically fits whatever height you give the block. */
+  /* Sizes scale off vh — inside this iframe that means "percent of the
+     DAKboard block height" — but are capped in px so the text doesn't
+     balloon when you open the page in a tall browser window to test. */
   #wrap{width:100%;overflow:hidden;white-space:nowrap}
   #track{display:inline-block;white-space:nowrap;will-change:transform}
   .chunk{display:inline-block;white-space:nowrap}
 
   .item{
-    display:inline-flex;align-items:center;gap:1.2vh;
-    font-size:34vh;line-height:1;
-    padding:0 2.6vh;
+    display:inline-flex;align-items:center;gap:min(1.2vh,10px);
+    font-size:min(34vh,44px);line-height:1;
+    padding:0 min(2.6vh,26px);
   }
-  .item img{height:44vh;width:auto;vertical-align:middle}
+  .item img{height:min(44vh,54px);width:auto;vertical-align:middle}
   .label{font-weight:750;letter-spacing:.02em}
   .stat{color:#aab6c4;font-weight:500}
   .W{color:#3ddc84;font-weight:800}
   .L{color:#ff6b6b;font-weight:800}
   .D{color:#ffd166;font-weight:800}
   .livetag{
-    background:#ff3b30;color:#fff;font-size:24vh;font-weight:800;
-    letter-spacing:.08em;padding:.4vh 1vh;border-radius:.6vh;
+    background:#ff3b30;color:#fff;font-size:min(24vh,30px);font-weight:800;
+    letter-spacing:.08em;padding:.4vh 1vh;border-radius:4px;
   }
-  .sep{color:#4b5666;font-size:30vh;padding:0 .6vh}
-  .msg{font-size:30vh;color:#8b98a8;padding:0 2vh}
+  .sep{color:#4b5666;font-size:min(30vh,38px);padding:0 6px}
+  .msg{font-size:min(30vh,38px);color:#8b98a8;padding:0 20px}
 </style>
 </head>
 <body>
@@ -44,23 +44,26 @@
 
 <script>
 /* ============================================================
-   HUGHESLANDIA SPORTS TICKER
-   Designed to sit as a full-width footer band on any DAKboard
-   page. Put the same Widget Block on all three pages.
+   HUGHESLANDIA SPORTS TICKER  —  v2
+   Full-width footer band. Put the same Widget Block on all
+   three DAKboard pages.
 
    Data: ESPN public scoreboard endpoint only (the /teams and
-   /schedule endpoints have no CORS headers and cannot be read
-   from a browser).
+   /schedule endpoints send no CORS headers and cannot be read
+   from browser JavaScript).
 
    Teams with no games in the window are skipped entirely, so
-   the ticker stays short in the offseason.
+   the ticker stays short during the offseason.
    ============================================================ */
 
 const TZ = "America/New_York";
 const REFRESH_MINUTES = 8;
 const DAYS_BACK  = 7;
 const DAYS_AHEAD = 14;
-const PIXELS_PER_SECOND = 70;   // scroll speed — lower is slower
+
+// Scroll speed in pixels per second. Higher = faster.
+// 70 is a slow crawl, 150 is brisk, 250 is fast.
+const PIXELS_PER_SECOND = 150;
 
 const LEAGUES = [
   { key:"football/nfl" },
@@ -219,8 +222,7 @@ function startScroll(){
   const w = chunk.getBoundingClientRect().width;
   if(!w) return;
 
-  // Duplicate content so the loop is seamless, then animate one chunk width.
-  const dur = Math.max(12, w / PIXELS_PER_SECOND);
+  const dur = Math.max(8, w / PIXELS_PER_SECOND);
   const old = document.getElementById("tickerAnim");
   if(old) old.remove();
   const style = document.createElement("style");
