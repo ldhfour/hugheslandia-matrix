@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Hugheslandia Scoreboard</title>
+<style>
+  :root{
+    --bg:#0b0f14; --card:#151b23; --card2:#1b222c; --line:#28313d;
+    --txt:#e8eef6; --dim:#8b98a8;
+    --win:#3ddc84; --loss:#ff6b6b; --draw:#ffd166;
+    --live:#ff3b30; --accent:#4da3ff;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{height:100%}
+  body{
+    background:var(--bg); color:var(--txt);
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    padding:1.2vw 1.6vw; overflow:hidden;
+  }
+  header{
+    display:flex;align-items:baseline;justify-content:space-between;
+    border-bottom:2px solid var(--line);padding-bottom:.6vw;margin-bottom:1vw;
+  }
+  h1{font-size:2.1vw;letter-spacing:.04em;font-weight:700}
+  #stamp{font-size:1.05vw;color:var(--dim)}
+  #stamp.stale{color:var(--draw)}
+
+  #board{display:grid;grid-template-columns:repeat(3,1fr);gap:1vw;align-content:start}
+  .group{background:var(--card);border:1px solid var(--line);border-radius:.8vw;overflow:hidden}
+  .group h2{
+    font-size:1.15vw;letter-spacing:.12em;text-transform:uppercase;
+    color:var(--accent);font-weight:700;padding:.65vw .9vw;
+    background:var(--card2);border-bottom:1px solid var(--line);
+  }
+  .row{display:flex;align-items:center;gap:.8vw;padding:.7vw .9vw;
+       border-bottom:1px solid rgba(40,49,61,.55)}
+  .row:last-child{border-bottom:none}
+  .row img{width:2.6vw;height:2.6vw;object-fit:contain;flex:0 0 auto}
+  .row .meta{flex:1;min-width:0}
+  .team{font-size:1.25vw;font-weight:650;line-height:1.2}
+  .sub{font-size:.95vw;color:var(--dim);line-height:1.35;margin-top:.15vw;
+       white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .sub .W{color:var(--win);font-weight:700}
+  .sub .L{color:var(--loss);font-weight:700}
+  .sub .D{color:var(--draw);font-weight:700}
+  .rec{font-size:.95vw;color:var(--dim);flex:0 0 auto}
+  .live{background:rgba(255,59,48,.10);border-left:.35vw solid var(--live)}
+  .livetag{display:inline-block;background:var(--live);color:#fff;font-size:.75vw;
+           font-weight:800;letter-spacing:.08em;padding:.1vw .4vw;border-radius:.25vw;
+           margin-right:.4vw;vertical-align:middle}
+
+  .strip{grid-column:1 / -1}
+  .stripwrap{display:flex;flex-wrap:wrap;gap:.5vw;padding:.8vw .9vw}
+  .fixture{background:var(--card2);border:1px solid var(--line);border-radius:.4vw;
+           padding:.4vw .7vw;font-size:.98vw;white-space:nowrap}
+  .fixture b{font-weight:750}
+  .muted{color:var(--dim);font-size:1vw;padding:.8vw .9vw}
+  #err{color:var(--draw);font-size:.9vw;margin-top:.6vw}
+</style>
+</head>
+<body>
+
+<header>
+  <h1>SCOREBOARD</h1>
+  <div id="stamp">loading…</div>
+</header>
+
+<div id="board"><div class="muted">Fetching scores…</div></div>
+<div id="err"></div>
+
+<script>
+/* ============================================================
+   HUGHESLANDIA SCOREBOARD  —  v2
+
+   Data source: ESPN public scoreboard endpoint ONLY.
+     https://site.api.espn.com/apis/site/v2/sports/{sport}/{league}/scoreboard
+
+   Why only that endpoint: ESPN's /teams and /teams/{id}/schedule
+   endpoints do not send CORS headers, so browser JavaScript cannot
+   read them (this is what broke v1). The scoreboard endpoint does.
+   Everything below is built from one scoreboard call per league
+   over a date window, filtered to our teams on the client.
+
+   To add a team: add a line to TEAMS. "match" is compared against
+   ESPN's displayName / shortDisplayName, ignoring case and
+   punctuation. Make sure its league also appears in LEAGUES.
+   ============================================================ */
+
+const TZ = "America/New_York";
+const REFRESH_MINUTES = 8;
+const DAYS_BACK  = 10;   // how far back to look for the last result
+const DAYS_AHEAD = 21;   // how far forward to look for the next game
+
+// One scoreboard fetch per entry. key = sport/league.
+const LEAGUES = [
+  { key:"football/nfl" },
+  { key:"baseball/mlb" },
+  { key:"hockey/nhl" },
+  { key:"soccer/eng.1" },
+  { key:"soccer/usa.usl.1" },
+  { key:"football/college-football",             extra:"&groups=80" },  // all FBS
+  { key:"basketball/mens-college-basketball",    extra:"&groups=50" },  // all D-I
+  { key:"basketball/womens-college-basketball",  extra:"&groups=50" },
+  { key:"hockey/mens-college-hockey" },
+  { key:"baseball/college-baseball" },
+];
+
+const TEAMS = [
+  { group:"Tampa Bay", label:"Buccaneers", league:"football/nfl",     match:"Tampa Bay Buccaneers" },
+  { group:"Tampa Bay", label:"Lightning",  league:"hockey/nhl",       match:"Tampa Bay Lightning" },
+  { group:"Tampa Bay", label:"Rays",       league:"baseball/mlb",     match:"Tampa Bay Rays" },
+  { group:"Tampa Bay", label:"Rowdies",    league:"soccer/usa.usl.1", match:"Tampa Bay Rowdies" },
+
+  { group:"Michigan", label:"Football",      league:"football/college-football",            match:"Michigan Wolverines" },
+  { group:"Michigan", label:"Men's Hoops",   league:"basketball/mens-college-basketball",   match:"Michigan Wolverines" },
+  { group:"Michigan", label:"Women's Hoops", league:"basketball/womens-college-basketball", match:"Michigan Wolverines" },
+  { group:"Michigan", label:"Hockey",        league:"hockey/mens-college-hockey",           match:"Michigan Wolverines" },
+  { group:"Michigan", label:"Baseball",      league:"baseball/college-baseball",            match:"Michigan Wolverines" },
+
+  { group:"Premier League", label:"Man United", league:"soccer/eng.1", match:"Manchester United" },
+
+  { group:"Baseball", label:"Mariners", league:"baseball/mlb", match:"Seattle Mariners" },
+  { group:"Baseball", label:"Angels",   league:"baseball/mlb", match:"Los Angeles Angels" },
+  { group:"Baseball", label:"Padres",   league:"baseball/mlb", match:"San Diego Padres" },
+
+  { group:"Denver",   label:"Broncos",  league:"football/nfl", match:"Denver Broncos" },
+];
+
+const GROUP_ORDER = ["Tampa Bay","Michigan","Premier League","Baseball","Denver"];
+const EPL_STRIP = { enabled:true, max:10 };
+
+// ---------------------------------------------------------------
+
+const API = "https://site.api.espn.com/apis/site/v2/sports";
+const norm = s => (s||"").toLowerCase().replace(/[^a-z0-9]/g,"");
+const problems = [];
+
+function ymd(d){
+  return d.getFullYear() + String(d.getMonth()+1).padStart(2,"0") + String(d.getDate()).padStart(2,"0");
+}
+
+async function getJSON(url){
+  const r = await fetch(url, {cache:"no-store"});
+  if(!r.ok) throw new Error(r.status);
+  return r.json();
+}
+
+// Fetch every league's events for the window. Failures are recorded, never fatal.
+async function loadLeagues(){
+  const start = ymd(new Date(Date.now() - DAYS_BACK*864e5));
+  const end   = ymd(new Date(Date.now() + DAYS_AHEAD*864e5));
+  const out = {};
+  await Promise.all(LEAGUES.map(async L => {
+    const url = `${API}/${L.key}/scoreboard?dates=${start}-${end}&limit=1000${L.extra||""}`;
+    try{
+      const d = await getJSON(url);
+      out[L.key] = d.events || [];
+    }catch(e){
+      out[L.key] = [];
+      problems.push(`${L.key} feed unavailable`);
+    }
+  }));
+  return out;
+}
+
+function scoreOf(c){
+  if(!c || c.score == null) return null;
+  if(typeof c.score === "object") return c.score.displayValue ?? c.score.value ?? null;
+  return c.score;
+}
+
+function isTeam(competitor, want){
+  const t = competitor.team || {};
+  const w = norm(want);
+  return norm(t.displayName) === w
+      || norm(t.shortDisplayName) === w
+      || norm((t.location||"")+(t.name||"")) === w
+      || (w.length > 6 && norm(t.displayName).includes(w));
+}
+
+function pickEvents(events, want){
+  let live=null, last=null, next=null, me=null;
+  for(const ev of events){
+    const comp = ev.competitions?.[0];
+    if(!comp) continue;
+    const mine = (comp.competitors||[]).find(c => isTeam(c, want));
+    if(!mine) continue;
+    me = me || mine.team;
+    const st = comp.status?.type || ev.status?.type || {};
+    const t = new Date(ev.date).getTime();
+    if(st.state === "in") live = ev;
+    else if(st.completed || st.state === "post"){
+      if(!last || t > new Date(last.date).getTime()) last = ev;
+    } else {
+      if(!next || t < new Date(next.date).getTime()) next = ev;
+    }
+  }
+  return {live,last,next,me};
+}
+
+function sides(ev, want){
+  const comp = ev.competitions?.[0] || {};
+  const cs = comp.competitors || [];
+  const mine = cs.find(c => isTeam(c, want)) || cs[0] || {};
+  const opp  = cs.find(c => c !== mine) || {};
+  return {comp, mine, opp};
+}
+
+function oppName(opp){
+  const t = opp.team || {};
+  return t.abbreviation || t.shortDisplayName || t.displayName || "TBD";
+}
+
+function fmtDate(iso){
+  return new Date(iso).toLocaleString("en-US",{
+    timeZone:TZ, weekday:"short", month:"numeric", day:"numeric",
+    hour:"numeric", minute:"2-digit"
+  }).replace(",","");
+}
+
+function finalLine(ev, want){
+  const {mine,opp} = sides(ev,want);
+  const a = scoreOf(mine), b = scoreOf(opp);
+  if(a == null || b == null) return "Final";
+  let r = "D";
+  if(mine.winner === true) r = "W";
+  else if(opp.winner === true) r = "L";
+  else if(Number(a) > Number(b)) r = "W";
+  else if(Number(a) < Number(b)) r = "L";
+  return `<span class="${r}">${r}</span> ${a}–${b} ${mine.homeAway==="home"?"vs":"@"} ${oppName(opp)}`;
+}
+
+function liveLine(ev, want){
+  const {comp,mine,opp} = sides(ev,want);
+  const det = comp.status?.type?.shortDetail || comp.status?.type?.detail || "";
+  return `<span class="livetag">LIVE</span>${scoreOf(mine)??0}–${scoreOf(opp)??0} `
+       + `${mine.homeAway==="home"?"vs":"@"} ${oppName(opp)} · ${det}`;
+}
+
+function nextLine(ev, want){
+  const {mine,opp} = sides(ev,want);
+  return `${fmtDate(ev.date)} ${mine.homeAway==="home"?"vs":"@"} ${oppName(opp)}`;
+}
+
+function recordOf(ev, want){
+  if(!ev) return "";
+  const {mine} = sides(ev,want);
+  return mine.records?.[0]?.summary || "";
+}
+
+function buildRow(cfg, events){
+  const {live,last,next,me} = pickEvents(events, cfg.match);
+
+  let sub, isLive = false;
+  if(live){ sub = liveLine(live, cfg.match); isLive = true; }
+  else{
+    const bits = [];
+    if(last) bits.push(finalLine(last, cfg.match));
+    if(next) bits.push(nextLine(next, cfg.match));
+    sub = bits.join("  ·  ") || "No games in window";
+  }
+
+  const logo = me?.logo || me?.logos?.[0]?.href || "";
+  const rec  = recordOf(last || live || next, cfg.match);
+
+  return `<div class="row${isLive?" live":""}">
+    ${logo ? `<img src="${logo}" alt="" onerror="this.style.visibility='hidden'">`
+           : `<div style="width:2.6vw"></div>`}
+    <div class="meta">
+      <div class="team">${cfg.label}</div>
+      <div class="sub">${sub}</div>
+    </div>
+    ${rec ? `<div class="rec">${rec}</div>` : ""}
+  </div>`;
+}
+
+function eplStrip(events){
+  if(!EPL_STRIP.enabled) return "";
+  const items = [];
+  for(const ev of events){
+    const comp = ev.competitions?.[0]; if(!comp) continue;
+    const st = comp.status?.type || {};
+    const cs = comp.competitors || [];
+    const home = cs.find(c=>c.homeAway==="home") || cs[0];
+    const away = cs.find(c=>c.homeAway==="away") || cs[1];
+    if(!home || !away) continue;
+    const h = home.team?.shortDisplayName || home.team?.abbreviation || "";
+    const a = away.team?.shortDisplayName || away.team?.abbreviation || "";
+    const t = new Date(ev.date).getTime();
+    if(st.state === "in"){
+      items.push({t, html:`<div class="fixture"><span class="livetag">LIVE</span><b>${h} ${scoreOf(home)}–${scoreOf(away)} ${a}</b></div>`});
+    }else if(st.completed || st.state === "post"){
+      items.push({t, html:`<div class="fixture"><b>${h} ${scoreOf(home)}–${scoreOf(away)} ${a}</b></div>`});
+    }
+  }
+  if(!items.length) return "";
+  items.sort((x,y)=>y.t-x.t);
+  return `<div class="group strip">
+    <h2>Premier League — Recent Results</h2>
+    <div class="stripwrap">${items.slice(0,EPL_STRIP.max).map(i=>i.html).join("")}</div>
+  </div>`;
+}
+
+async function render(){
+  problems.length = 0;
+  const data = await loadLeagues();
+
+  const byGroup = {};
+  for(const cfg of TEAMS){
+    const events = data[cfg.league];
+    if(!events){ problems.push(`${cfg.label}: ${cfg.league} missing from LEAGUES`); continue; }
+    (byGroup[cfg.group] ||= []).push(buildRow(cfg, events));
+  }
+
+  const names = GROUP_ORDER.filter(g => byGroup[g])
+                .concat(Object.keys(byGroup).filter(g => !GROUP_ORDER.includes(g)));
+
+  let out = names.map(g => `<div class="group"><h2>${g}</h2>${byGroup[g].join("")}</div>`).join("");
+  out += eplStrip(data["soccer/eng.1"] || []);
+
+  document.getElementById("board").innerHTML = out || `<div class="muted">No data returned.</div>`;
+
+  const stamp = document.getElementById("stamp");
+  stamp.textContent = "updated " + new Date().toLocaleString("en-US",
+    {timeZone:TZ, hour:"numeric", minute:"2-digit", month:"numeric", day:"numeric"});
+  stamp.classList.remove("stale");
+
+  document.getElementById("err").textContent = problems.length ? problems.join(" · ") : "";
+}
+
+async function tick(){
+  try{ await render(); }
+  catch(e){
+    document.getElementById("stamp").classList.add("stale");
+    document.getElementById("err").textContent = "Refresh failed: " + e.message;
+  }
+}
+
+tick();
+setInterval(tick, REFRESH_MINUTES * 60 * 1000);
+setTimeout(() => location.reload(), 24*60*60*1000);
+</script>
+</body>
+</html>
