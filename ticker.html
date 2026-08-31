@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Hugheslandia Sports Ticker</title>
+<style>
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{height:100%;overflow:hidden;background:transparent}
+  body{
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    color:#e8eef6;
+    display:flex;align-items:center;
+  }
+
+  /* Everything scales off vh, which inside this iframe means
+     "percent of the DAKboard block height" — so the ticker
+     automatically fits whatever height you give the block. */
+  #wrap{width:100%;overflow:hidden;white-space:nowrap}
+  #track{display:inline-block;white-space:nowrap;will-change:transform}
+  .chunk{display:inline-block;white-space:nowrap}
+
+  .item{
+    display:inline-flex;align-items:center;gap:1.2vh;
+    font-size:34vh;line-height:1;
+    padding:0 2.6vh;
+  }
+  .item img{height:44vh;width:auto;vertical-align:middle}
+  .label{font-weight:750;letter-spacing:.02em}
+  .stat{color:#aab6c4;font-weight:500}
+  .W{color:#3ddc84;font-weight:800}
+  .L{color:#ff6b6b;font-weight:800}
+  .D{color:#ffd166;font-weight:800}
+  .livetag{
+    background:#ff3b30;color:#fff;font-size:24vh;font-weight:800;
+    letter-spacing:.08em;padding:.4vh 1vh;border-radius:.6vh;
+  }
+  .sep{color:#4b5666;font-size:30vh;padding:0 .6vh}
+  .msg{font-size:30vh;color:#8b98a8;padding:0 2vh}
+</style>
+</head>
+<body>
+
+<div id="wrap"><div id="track"><span class="msg">Loading scores…</span></div></div>
+
+<script>
+/* ============================================================
+   HUGHESLANDIA SPORTS TICKER
+   Designed to sit as a full-width footer band on any DAKboard
+   page. Put the same Widget Block on all three pages.
+
+   Data: ESPN public scoreboard endpoint only (the /teams and
+   /schedule endpoints have no CORS headers and cannot be read
+   from a browser).
+
+   Teams with no games in the window are skipped entirely, so
+   the ticker stays short in the offseason.
+   ============================================================ */
+
+const TZ = "America/New_York";
+const REFRESH_MINUTES = 8;
+const DAYS_BACK  = 7;
+const DAYS_AHEAD = 14;
+const PIXELS_PER_SECOND = 70;   // scroll speed — lower is slower
+
+const LEAGUES = [
+  { key:"football/nfl" },
+  { key:"baseball/mlb" },
+  { key:"hockey/nhl" },
+  { key:"soccer/eng.1" },
+  { key:"soccer/usa.usl.1" },
+  { key:"football/college-football",             extra:"&groups=80" },
+  { key:"basketball/mens-college-basketball",    extra:"&groups=50" },
+  { key:"basketball/womens-college-basketball",  extra:"&groups=50" },
+  { key:"hockey/mens-college-hockey" },
+  { key:"baseball/college-baseball" },
+];
+
+const TEAMS = [
+  { label:"BUCS",      league:"football/nfl",     match:"Tampa Bay Buccaneers" },
+  { label:"LIGHTNING", league:"hockey/nhl",       match:"Tampa Bay Lightning" },
+  { label:"RAYS",      league:"baseball/mlb",     match:"Tampa Bay Rays" },
+  { label:"ROWDIES",   league:"soccer/usa.usl.1", match:"Tampa Bay Rowdies" },
+
+  { label:"MICH FB",   league:"football/college-football",            match:"Michigan Wolverines" },
+  { label:"MICH MBB",  league:"basketball/mens-college-basketball",   match:"Michigan Wolverines" },
+  { label:"MICH WBB",  league:"basketball/womens-college-basketball", match:"Michigan Wolverines" },
+  { label:"MICH HKY",  league:"hockey/mens-college-hockey",           match:"Michigan Wolverines" },
+  { label:"MICH BSB",  league:"baseball/college-baseball",            match:"Michigan Wolverines" },
+
+  { label:"MAN UTD",   league:"soccer/eng.1",     match:"Manchester United" },
+
+  { label:"MARINERS",  league:"baseball/mlb",     match:"Seattle Mariners" },
+  { label:"ANGELS",    league:"baseball/mlb",     match:"Los Angeles Angels" },
+  { label:"PADRES",    league:"baseball/mlb",     match:"San Diego Padres" },
+
+  { label:"BRONCOS",   league:"football/nfl",     match:"Denver Broncos" },
+];
+
+// ---------------------------------------------------------------
+
+const API = "https://site.api.espn.com/apis/site/v2/sports";
+const norm = s => (s||"").toLowerCase().replace(/[^a-z0-9]/g,"");
+
+const ymd = d => d.getFullYear()
+  + String(d.getMonth()+1).padStart(2,"0")
+  + String(d.getDate()).padStart(2,"0");
+
+async function getJSON(url){
+  const r = await fetch(url,{cache:"no-store"});
+  if(!r.ok) throw new Error(r.status);
+  return r.json();
+}
+
+async function loadLeagues(){
+  const start = ymd(new Date(Date.now() - DAYS_BACK*864e5));
+  const end   = ymd(new Date(Date.now() + DAYS_AHEAD*864e5));
+  const out = {};
+  await Promise.all(LEAGUES.map(async L => {
+    try{
+      const d = await getJSON(`${API}/${L.key}/scoreboard?dates=${start}-${end}&limit=1000${L.extra||""}`);
+      out[L.key] = d.events || [];
+    }catch(e){ out[L.key] = []; }
+  }));
+  return out;
+}
+
+function scoreOf(c){
+  if(!c || c.score == null) return null;
+  if(typeof c.score === "object") return c.score.displayValue ?? c.score.value ?? null;
+  return c.score;
+}
+
+function isTeam(c, want){
+  const t = c.team || {}, w = norm(want);
+  return norm(t.displayName) === w
+      || norm(t.shortDisplayName) === w
+      || norm((t.location||"")+(t.name||"")) === w
+      || (w.length > 6 && norm(t.displayName).includes(w));
+}
+
+function pick(events, want){
+  let live=null,last=null,next=null,me=null;
+  for(const ev of events){
+    const comp = ev.competitions?.[0]; if(!comp) continue;
+    const mine = (comp.competitors||[]).find(c => isTeam(c,want));
+    if(!mine) continue;
+    me = me || mine.team;
+    const st = comp.status?.type || {};
+    const t = new Date(ev.date).getTime();
+    if(st.state === "in") live = ev;
+    else if(st.completed || st.state === "post"){
+      if(!last || t > new Date(last.date).getTime()) last = ev;
+    }else{
+      if(!next || t < new Date(next.date).getTime()) next = ev;
+    }
+  }
+  return {live,last,next,me};
+}
+
+function sides(ev, want){
+  const comp = ev.competitions?.[0] || {};
+  const cs = comp.competitors || [];
+  const mine = cs.find(c => isTeam(c,want)) || cs[0] || {};
+  const opp  = cs.find(c => c !== mine) || {};
+  return {comp,mine,opp};
+}
+
+const oppName = o => (o.team?.abbreviation || o.team?.shortDisplayName || "TBD");
+
+function fmtDate(iso){
+  return new Date(iso).toLocaleString("en-US",{
+    timeZone:TZ, weekday:"short", month:"numeric", day:"numeric",
+    hour:"numeric", minute:"2-digit"
+  }).replace(",","");
+}
+
+function textFor(cfg, events){
+  const {live,last,next,me} = pick(events, cfg.match);
+  if(!live && !last && !next) return null;   // offseason — skip entirely
+
+  const logo = me?.logo || me?.logos?.[0]?.href || "";
+  const img  = logo ? `<img src="${logo}" onerror="this.remove()">` : "";
+  let body;
+
+  if(live){
+    const {comp,mine,opp} = sides(live,cfg.match);
+    const det = comp.status?.type?.shortDetail || "";
+    body = `<span class="livetag">LIVE</span>`
+         + `<span class="stat">${scoreOf(mine)??0}–${scoreOf(opp)??0} `
+         + `${mine.homeAway==="home"?"vs":"@"} ${oppName(opp)} · ${det}</span>`;
+  }else if(last){
+    const {mine,opp} = sides(last,cfg.match);
+    const a = scoreOf(mine), b = scoreOf(opp);
+    let r = "D";
+    if(mine.winner === true) r = "W";
+    else if(opp.winner === true) r = "L";
+    else if(Number(a) > Number(b)) r = "W";
+    else if(Number(a) < Number(b)) r = "L";
+    body = `<span class="${r}">${r}</span> `
+         + `<span class="stat">${a}–${b} ${mine.homeAway==="home"?"vs":"@"} ${oppName(opp)}</span>`;
+    if(next){
+      const n = sides(next,cfg.match);
+      body += `<span class="stat"> · next ${fmtDate(next.date)} `
+            + `${n.mine.homeAway==="home"?"vs":"@"} ${oppName(n.opp)}</span>`;
+    }
+  }else{
+    const {mine,opp} = sides(next,cfg.match);
+    body = `<span class="stat">${fmtDate(next.date)} `
+         + `${mine.homeAway==="home"?"vs":"@"} ${oppName(opp)}</span>`;
+  }
+
+  return `<span class="item">${img}<span class="label">${cfg.label}</span>${body}</span>`;
+}
+
+function startScroll(){
+  const track = document.getElementById("track");
+  const chunk = track.querySelector(".chunk");
+  if(!chunk) return;
+  const w = chunk.getBoundingClientRect().width;
+  if(!w) return;
+
+  // Duplicate content so the loop is seamless, then animate one chunk width.
+  const dur = Math.max(12, w / PIXELS_PER_SECOND);
+  const old = document.getElementById("tickerAnim");
+  if(old) old.remove();
+  const style = document.createElement("style");
+  style.id = "tickerAnim";
+  style.textContent =
+    `@keyframes rollby{from{transform:translateX(0)}to{transform:translateX(-${w}px)}}`;
+  document.head.appendChild(style);
+  track.style.animation = `rollby ${dur}s linear infinite`;
+}
+
+async function render(){
+  const data = await loadLeagues();
+
+  const items = TEAMS
+    .map(cfg => textFor(cfg, data[cfg.league] || []))
+    .filter(Boolean);
+
+  const track = document.getElementById("track");
+
+  if(!items.length){
+    track.style.animation = "none";
+    track.innerHTML = `<span class="msg">No games in the current window</span>`;
+    return;
+  }
+
+  const inner = items.join(`<span class="sep">•</span>`) + `<span class="sep">•</span>`;
+  // Two identical chunks side by side = seamless wraparound
+  track.innerHTML = `<span class="chunk">${inner}</span><span class="chunk">${inner}</span>`;
+  track.style.animation = "none";
+  requestAnimationFrame(startScroll);
+}
+
+async function tick(){
+  try{ await render(); }
+  catch(e){
+    document.getElementById("track").innerHTML =
+      `<span class="msg">Scores unavailable</span>`;
+  }
+}
+
+tick();
+setInterval(tick, REFRESH_MINUTES * 60 * 1000);
+setTimeout(() => location.reload(), 24*60*60*1000);
+window.addEventListener("resize", () => requestAnimationFrame(startScroll));
+</script>
+</body>
+</html>
