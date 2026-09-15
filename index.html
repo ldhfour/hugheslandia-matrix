@@ -96,31 +96,49 @@
 
   .ev + .ev { margin-top: .3em; }
 
+  /* A long compact row may still wrap on a narrow canvas. The hanging
+     indent makes the second line read as a continuation rather than as
+     a separate event sitting under the wrong date. */
+  .ev {
+    padding-left: 1.1em;
+    text-indent: -1.1em;
+  }
+
+  /* text-indent inherits, and it applies to inline-block boxes — without
+     this reset the DAYS and calendar badges each shift their own text
+     1.1em left and land on top of whatever preceded them. */
+  .span, .who { text-indent: 0; }
+
   .title { display: inline; }
 
   .loc::before {
-    content: "·";
+    content: "\00B7";
     color: var(--faint);
     margin: 0 .4em;
   }
   .loc { color: var(--dim); }
 
-  /* Meet/start time gets its own line under the matchup so it's the thing
-     the eye lands on — this board exists to answer "when do we leave?". */
   .when {
-    display: block;
-    margin-top: .12em;
     font-variant-numeric: tabular-nums;
     font-weight: 700;
     color: var(--accent);
   }
+  .when::before {
+    content: "\00B7";
+    color: var(--faint);
+    font-weight: 400;
+    margin: 0 .4em;
+  }
   .when.est { font-weight: 600; }   /* start is derived; slightly softer */
 
   .gamedetail {
-    display: block;
-    margin-top: .05em;
-    font-size: .8em;
+    font-size: .82em;
     color: var(--dim);
+  }
+  .gamedetail::before {
+    content: "\00B7";
+    color: var(--faint);
+    margin: 0 .4em;
   }
 
   .who {
@@ -150,32 +168,29 @@
   <h1>Travel &amp; Event Matrix</h1>
 <h2 class="month">September</h2>
 <div class="row multi"><div class="date">18-19</div><div class="events"><div class="ev"><span class="title">2026 Virtual Annual Meeting</span><span class="span">2 days</span><span class="who">USMS</span></div></div></div>
-<div class="row"><div class="date">20</div><div class="events"><div class="ev"><span class="title">DME U14 MLS – Tampa Bay United</span><span class="loc">Tatum Ridge Elementary School</span><span class="when est">2:00p meet · 3:00p start (est.)</span><span class="gamedetail">Field #3</span><span class="who">Lowry</span></div></div></div>
+<div class="row"><div class="date">20</div><div class="events"><div class="ev"><span class="title">vs Tampa Bay United</span><span class="loc">Tatum Ridge</span><span class="when est">2:00p meet · 3:00p start (est.)</span><span class="gamedetail">Field #3</span><span class="who">Lowry</span></div></div></div>
 <div class="row multi"><div class="date">24-28</div><div class="events"><div class="ev"><span class="title">Stay: Denver Airport Marriott at Gateway Park</span><span class="span">5 days</span><span class="who">Dawson</span></div><div class="ev"><span class="title">USMS Relay and National Coaches Clinic</span><span class="span">5 days</span><span class="who">USMS</span></div></div></div>
 <div class="row multi"><div class="date">24-27</div><div class="events"><div class="ev"><span class="title">USA Swimming Workshop, FBOD, and Golden Goggles</span><span class="span">4 days</span><span class="who">USMS</span></div></div></div>
 <div class="row"><div class="date">26</div><div class="events"><div class="ev"><span class="title">8th Grade Cotillion Dance (time TBD)</span><span class="who">Hughes Family</span></div></div></div>
-<div class="row"><div class="date">27</div><div class="events"><div class="ev"><span class="title">DME U14 MLS – Seminole United</span><span class="loc">Tatum Ridge Elementary School</span><span class="when est">2:00p meet · 3:00p start (est.)</span><span class="gamedetail">Field #1</span><span class="who">Lowry</span></div></div></div>
-<div class="row"><div class="date">30</div><div class="events"><div class="ev"><span class="title">My birthday</span><span class="who">Hughes Family</span></div></div></div>
+<div class="row"><div class="date">27</div><div class="events"><div class="ev"><span class="title">vs Seminole United</span><span class="loc">Tatum Ridge</span><span class="when est">2:00p meet · 3:00p start (est.)</span><span class="gamedetail">Field #1</span><span class="who">Lowry</span></div></div></div>
 <h2 class="month">October</h2>
 <div class="row multi"><div class="date">1-2</div><div class="events"><div class="ev"><span class="title">Dawson Off - House Projects</span><span class="span">2 days</span><span class="who">Dawson</span></div><div class="ev"><span class="title">Dawson — :calendar: Comp Day (Out of Office)</span><span class="span">2 days</span><span class="who">USMS</span></div></div></div>
-<div class="row"><div class="date">2</div><div class="events"><div class="ev"><span class="title">Liss' birthday</span><span class="who">Kelly</span></div><div class="ev"><span class="title">Natasha's birthday</span><span class="who">Kelly</span></div></div></div>
-<div class="row"><div class="date">3</div><div class="events"><div class="ev"><span class="title">DME U14 MLS – Jacksonville FC</span><span class="loc">Skye Ranch School</span><span class="when est">2:00p meet · 3:00p start (est.)</span><span class="gamedetail">Field #1</span><span class="who">Lowry</span></div></div></div>
+<div class="row"><div class="date">3</div><div class="events"><div class="ev"><span class="title">vs Jacksonville FC</span><span class="loc">Skye Ranch</span><span class="when est">2:00p meet · 3:00p start (est.)</span><span class="gamedetail">Field #1</span><span class="who">Lowry</span></div></div></div>
 <div class="row multi"><div class="date">3-4</div><div class="events"><div class="ev"><span class="title">Hadley birthday sleepy</span><span class="span">2 days</span><span class="who">Kelly</span></div></div></div>
-<div class="row"><div class="date">4</div><div class="events"><div class="ev"><span class="title">DME U14 MLS – United Soccer Alliance</span><span class="loc">Tatum Ridge Elementary School</span><span class="when est">1:00p meet · 2:00p start (est.)</span><span class="gamedetail">Field #3</span><span class="who">Lowry</span></div></div></div>
-<div class="row"><div class="date">10</div><div class="events"><div class="ev"><span class="title">DME U14 MLS – Nona Soccer Academy</span><span class="loc">Skye Ranch School</span><span class="when est">3:00p meet · 4:00p start (est.)</span><span class="gamedetail">Field #1</span><span class="who">Lowry</span></div></div></div>
+<div class="row"><div class="date">4</div><div class="events"><div class="ev"><span class="title">vs United Soccer Alliance</span><span class="loc">Tatum Ridge</span><span class="when est">1:00p meet · 2:00p start (est.)</span><span class="gamedetail">Field #3</span><span class="who">Lowry</span></div></div></div>
+<div class="row"><div class="date">10</div><div class="events"><div class="ev"><span class="title">vs Nona Soccer Academy</span><span class="loc">Skye Ranch</span><span class="who">Lowry</span></div></div></div>
 <div class="row"><div class="date">12</div><div class="events"><div class="ev"><span class="title">Professional workday, kids off</span><span class="who">Hughes Family</span></div></div></div>
-<div class="row"><div class="date">17</div><div class="events"><div class="ev"><span class="title">IMG – DME U14 MLS</span><span class="loc">IMG Academy</span><span class="when est">12:00p meet · 1:00p start (est.)</span><span class="gamedetail">Field #6</span><span class="who">Lowry</span></div></div></div>
-<div class="row"><div class="date">21</div><div class="events"><div class="ev"><span class="title">Katie Mallory Birthday</span><span class="who">Hughes Family</span></div></div></div>
-<div class="row"><div class="date">24</div><div class="events"><div class="ev"><span class="title">Orlando City Soccer School S – DME U14 MLS</span><span class="loc">Northeast Regional Park</span><span class="when est">2:00p meet · 3:00p start (est.)</span><span class="gamedetail">Turf Field #2</span><span class="who">Lowry</span></div></div></div>
+<div class="row"><div class="date">17</div><div class="events"><div class="ev"><span class="title">@ IMG</span><span class="loc">IMG Academy</span><span class="who">Lowry</span></div></div></div>
+<div class="row"><div class="date">24</div><div class="events"><div class="ev"><span class="title">@ Orlando City Soccer School S</span><span class="loc">Northeast Regional Park</span><span class="who">Lowry</span></div></div></div>
 <div class="row multi"><div class="date">24-25</div><div class="events"><div class="ev"><span class="title">Stay: Fairfield by Marriott Inn &amp; Suites Clermont</span><span class="span">2 days</span><span class="loc">Clermont, FL</span><span class="who">Dawson</span></div></div></div>
-<div class="row"><div class="date">25</div><div class="events"><div class="ev"><span class="title">Sol SC Florida – DME U14 MLS</span><span class="loc">The National Training Center - NTC 5</span><span class="when est">9:00a meet · 10:00a start (est.)</span><span class="who">Lowry</span></div></div></div>
+<div class="row"><div class="date">25</div><div class="events"><div class="ev"><span class="title">@ Sol SC Florida</span><span class="loc">The National Training Center - NTC 5</span><span class="who">Lowry</span></div></div></div>
 <div class="row"><div class="date">31</div><div class="events"><div class="ev"><span class="title">Halloween</span><span class="who">USMS</span></div></div></div>
 <h2 class="month">November</h2>
 <div class="row multi"><div class="date">6-8</div><div class="events"><div class="ev"><span class="title">Lowry: Tampa Super Cup</span><span class="span">3 days</span><span class="loc">Tampa, FL</span><span class="who">Lowry</span></div><div class="ev"><span class="title">Stay: Residence Inn by Marriott Tampa Sabal Park/Brandon</span><span class="span">3 days</span><span class="loc">Tampa, FL</span><span class="who">Dawson</span></div></div></div>
-<div class="row"><div class="date">14</div><div class="events"><div class="ev"><span class="title">DME U14 MLS – IdeaSport</span><span class="loc">Oak Park School</span><span class="when est">1:15p meet · 2:15p start (est.)</span><span class="gamedetail">Field #1</span><span class="who">Lowry</span></div></div></div>
-<div class="row"><div class="date">15</div><div class="events"><div class="ev"><span class="title">Orlando City Lake Nona – DME U14 MLS</span><span class="loc">Bomberos Field Park</span><span class="when est">10:45a meet · 11:45a start (est.)</span><span class="who">Lowry</span></div></div></div>
+<div class="row"><div class="date">14</div><div class="events"><div class="ev"><span class="title">vs IdeaSport</span><span class="loc">Oak Park</span><span class="who">Lowry</span></div></div></div>
+<div class="row"><div class="date">15</div><div class="events"><div class="ev"><span class="title">@ Orlando City Lake Nona</span><span class="loc">Bomberos Field Park</span><span class="who">Lowry</span></div></div></div>
 <div class="row"><div class="date">20</div><div class="events"><div class="ev"><span class="title">Sunrise on the reaping</span><span class="who">Hughes Family</span></div></div></div>
-<div class="row"><div class="date">22</div><div class="events"><div class="ev"><span class="title">DME U14 MLS – West Florida Flames</span><span class="loc">Tatum Ridge Elementary School</span><span class="when est">12:00p meet · 1:00p start (est.)</span><span class="gamedetail">Field #2</span><span class="who">Lowry</span></div></div></div>
+<div class="row"><div class="date">22</div><div class="events"><div class="ev"><span class="title">vs West Florida Flames</span><span class="loc">Tatum Ridge</span><span class="who">Lowry</span></div></div></div>
 <div class="row multi"><div class="date">23-25</div><div class="events"><div class="ev"><span class="title">Kids off school - Thanksgiving Break</span><span class="span">3 days</span><span class="who">Hughes Family</span></div></div></div>
 <div class="row"><div class="date">27</div><div class="events"><div class="ev"><span class="title">Kids off school - Thanksgiving Break</span><span class="who">Hughes Family</span></div></div></div>
 <div class="row"><div class="date">28</div><div class="events"><div class="ev"><span class="title">NNNNNNOOOOOOO TTTTRRRRAAAVVVEEEELLL</span><span class="who">Hughes Family</span></div></div></div>
@@ -185,6 +200,6 @@
 <div class="row multi"><div class="date">7-11</div><div class="events"><div class="ev"><span class="title">MLS Next Fest</span><span class="span">5 days</span><span class="loc">Scottsdale</span><span class="who">Lowry</span></div><div class="ev"><span class="title">Managers Draft Annual Performance Reviews</span><span class="span">5 days</span><span class="who">USMS</span></div></div></div>
 <div class="row"><div class="date">12</div><div class="events"><div class="ev"><span class="title">December - Governance Project Board Meeting</span><span class="who">USMS</span></div></div></div>
 <div class="row multi"><div class="date">14-18</div><div class="events"><div class="ev"><span class="title">Staff Annual Performance Review Meetings</span><span class="span">5 days</span><span class="who">USMS</span></div></div></div>
-  <footer>Updated Sep 15, 6:00 AM · edits go in the calendar</footer>
+  <footer>Updated Sep 15, 8:34 AM · edits go in the calendar</footer>
 </body>
 </html>
