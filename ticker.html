@@ -120,7 +120,7 @@ async function loadLeagues(){
   const out = {};
   await Promise.all(LEAGUES.map(async L => {
     try{
-      const d = await getJSON(`${API}/${L.key}/scoreboard?dates=${start}-${end}&limit=1000${L.extra||""}`);
+      const d = await getJSON(`${API}/${L.key}/scoreboard?dates=${start}-${end}${L.extra||""}`);
       out[L.key] = d.events || [];
     }catch(e){ out[L.key] = []; }
   }));
