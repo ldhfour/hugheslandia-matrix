@@ -115,14 +115,18 @@ async function getJSON(url){
 }
 
 async function loadLeagues(){
-  const start = ymd(new Date(Date.now() - DAYS_BACK*864e5));
-  const end   = ymd(new Date(Date.now() + DAYS_AHEAD*864e5));
+  const days = [];
+  for(let i=-DAYS_BACK;i<=DAYS_AHEAD;i++) days.push(ymd(new Date(Date.now()+i*864e5)));
   const out = {};
   await Promise.all(LEAGUES.map(async L => {
-    try{
-      const d = await getJSON(`${API}/${L.key}/scoreboard?dates=${start}-${end}${L.extra||""}`);
-      out[L.key] = d.events || [];
-    }catch(e){ console.warn("ESPN fail", L.key, e.message); out[L.key] = []; }
+    const seen = new Map();
+    await Promise.all(days.map(async d => {
+      try{
+        const j = await getJSON(`${API}/${L.key}/scoreboard?dates=${d}${L.extra||""}`);
+        (j.events||[]).forEach(e => seen.set(e.id, e));
+      }catch(e){ console.warn("ESPN fail", L.key, d, e.message); }
+    }));
+    out[L.key] = [...seen.values()];
   }));
   return out;
 }
