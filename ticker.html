@@ -109,7 +109,7 @@ const ymd = d => d.getFullYear()
   + String(d.getDate()).padStart(2,"0");
 
 async function getJSON(url){
-  const r = await fetch(url,{cache:"no-store"});
+  const r = await fetch(url);
   if(!r.ok) throw new Error(r.status);
   return r.json();
 }
@@ -122,7 +122,7 @@ async function loadLeagues(){
     try{
       const d = await getJSON(`${API}/${L.key}/scoreboard?dates=${start}-${end}${L.extra||""}`);
       out[L.key] = d.events || [];
-    }catch(e){ out[L.key] = []; }
+    }catch(e){ console.warn("ESPN fail", L.key, e.message); out[L.key] = []; }
   }));
   return out;
 }
