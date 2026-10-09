@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Text Threads</title>
+<style>
+  :root { --fs: 22px; --fg: #ffffff; --dim: rgba(255,255,255,.62); --rule: rgba(255,255,255,.22); }
+  html, body { margin: 0; background: transparent; }
+  body { font: 400 var(--fs)/1.35 -apple-system, "Helvetica Neue", Helvetica, Arial, sans-serif;
+         color: var(--fg); padding: .4em .6em; }
+  h1 { font-size: .8em; font-weight: 600; letter-spacing: .12em; text-transform: uppercase;
+        color: var(--dim); margin: 0 0 .5em; }
+  h2 { font-size: 1em; font-weight: 600; margin: .7em 0 .15em; padding-top: .5em;
+        border-top: 1px solid var(--rule); }
+  ul { margin: 0; padding-left: 1.1em; }
+  li { margin: .12em 0; }
+  .quiet { color: var(--dim); }
+  footer { margin-top: .8em; font-size: .7em; color: var(--dim); }
+</style>
+</head>
+<body>
+<h1>Text Threads</h1>
+<h2>DME Carpool</h2>
+<div class="quiet">Nothing to note</div>
+<h2>14s GSI Parents</h2>
+<ul>
+  <li>Sun Oct 25, 5:00 PM: team meeting and cookout at GSI</li>
+  <li>Meeting about 20 minutes, cookout follows</li>
+  <li>Food sign-up is coming; family should sign up when it&#x27;s posted</li>
+</ul>
+<footer>Updated Fri Oct 9, 4:30 PM · last 168 hours</footer>
+<script>
+  // Optional size override: texts.html?fs=18
+  var fs = new URLSearchParams(location.search).get("fs");
+  if (fs) document.documentElement.style.setProperty("--fs", parseFloat(fs) + "px");
+  // Reload every 10 minutes so the board never needs a ?v= bump
+  setTimeout(function () {
+    var p = new URLSearchParams(location.search); p.set("t", Date.now());
+    location.replace(location.pathname + "?" + p.toString());
+  }, 600000);
+</script>
+</body>
+</html>
