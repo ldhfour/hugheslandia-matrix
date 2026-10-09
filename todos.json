@@ -1,0 +1,78 @@
+{
+  "generated_at": "2026-10-09T10:06",
+  "date": "2026-10-09",
+  "people": [
+    {
+      "name": "Hadley",
+      "list": "HHH CHORES",
+      "open": [
+        {
+          "title": "Clothes Off Floor",
+          "due": null
+        },
+        {
+          "title": "Dresser Drawers closed",
+          "due": null
+        }
+      ],
+      "done": []
+    },
+    {
+      "name": "Lowry",
+      "list": "LDH5 CHORES",
+      "open": [
+        {
+          "title": "Clothes in Laundry Basket",
+          "due": null
+        },
+        {
+          "title": "Change Sheets",
+          "due": null
+        },
+        {
+          "title": "Unload Dishwasher",
+          "due": null
+        },
+        {
+          "title": "Bathroom Floor",
+          "due": null
+        },
+        {
+          "title": "Dishes and Trash on Desk",
+          "due": null
+        }
+      ],
+      "done": []
+    },
+    {
+      "name": "Kelly",
+      "list": "KLB To Do",
+      "open": [
+        {
+          "title": "UK Visa",
+          "due": null
+        }
+      ],
+      "done": []
+    },
+    {
+      "name": "Dawson",
+      "list": "LDH4 Chores",
+      "open": [
+        {
+          "title": "Soccer Uniforms Ready for weekend",
+          "due": "2026-10-09"
+        },
+        {
+          "title": "UK Visa",
+          "due": null
+        },
+        {
+          "title": "Pick-up Kelly Rx",
+          "due": null
+        }
+      ],
+      "done": []
+    }
+  ]
+}
