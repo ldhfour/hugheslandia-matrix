@@ -13,7 +13,7 @@
     --late:      #ff8a65;
     --done:      #7bd88f;
     --cols:      4;                              /* override with ?cols=2 */
-    --base:      clamp(14px, 2.1vw, 34px);       /* override with ?size=28 */
+    --base:      22px;                           /* set automatically — see fit() below */
   }
 
   * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -109,12 +109,45 @@
   var REFRESH_MS = 5 * 60 * 1000;   // re-read todos.json every 5 minutes
   var board = document.getElementById("board");
 
-  // Optional per-screen overrides: todos.html?cols=2&size=28
+  // Optional per-screen overrides: todos.html?cols=2&size=28&min=10
+  //   cols = columns across (default 4)
+  //   size = LARGEST text size allowed, in px (default scales with block width)
+  //   min  = SMALLEST text size allowed, in px (default 9)
   var params = new URLSearchParams(location.search);
   var cols = parseInt(params.get("cols"), 10);
   var size = parseInt(params.get("size"), 10);
+  var min  = parseInt(params.get("min"), 10);
   if (cols > 0) document.documentElement.style.setProperty("--cols", cols);
-  if (size > 0) document.documentElement.style.setProperty("--base", size + "px");
+
+  var MIN_PX = min > 0 ? min : 9;
+
+  function setBase(px) {
+    document.documentElement.style.setProperty("--base", px + "px");
+  }
+
+  // Shrink the text until the longest list fits the height of the DAKboard block.
+  // Uses the largest size that fits, between MIN_PX and the maximum.
+  function fit() {
+    var available = window.innerHeight;
+    if (!available || available < 40) return;      // block not laid out yet
+
+    var maxPx = size > 0 ? size : Math.min(34, Math.max(14, window.innerWidth * 0.021));
+    if (maxPx < MIN_PX) maxPx = MIN_PX;
+
+    function fits(px) {
+      setBase(px);
+      return board.getBoundingClientRect().height <= available;
+    }
+
+    if (fits(maxPx)) return;
+
+    var lo = MIN_PX, hi = maxPx;                    // lo = best known fit (or the floor)
+    while (hi - lo > 0.25) {
+      var mid = (lo + hi) / 2;
+      if (fits(mid)) lo = mid; else hi = mid;
+    }
+    setBase(Math.floor(lo * 4) / 4);
+  }
 
   function pad(n) { return (n < 10 ? "0" : "") + n; }
 
@@ -204,6 +237,8 @@
 
       board.appendChild(section);
     });
+
+    fit();
   }
 
   function load() {
@@ -215,6 +250,7 @@
 
   load();
   setInterval(load, REFRESH_MS);
+  window.addEventListener("resize", fit);
 })();
 </script>
 
