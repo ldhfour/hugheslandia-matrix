@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Family To Do</title>
+<style>
+  /* ── Tune these to match the rest of the board ───────────── */
+  :root {
+    --text:      #ffffff;
+    --dim:       rgba(255, 255, 255, 0.45);
+    --rule:      rgba(255, 255, 255, 0.18);
+    --late:      #ff8a65;
+    --done:      #7bd88f;
+    --cols:      4;                              /* override with ?cols=2 */
+    --base:      clamp(14px, 2.1vw, 34px);       /* override with ?size=28 */
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html, body {
+    background: transparent;
+    color: var(--text);
+    font-family: -apple-system, "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: var(--base);
+    line-height: 1.3;
+    overflow: hidden;
+  }
+
+  #board {
+    display: grid;
+    grid-template-columns: repeat(var(--cols), minmax(0, 1fr));
+    gap: 1.2em 1.4em;
+  }
+
+  .person h2 {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    font-size: 1.15em;
+    font-weight: 600;
+    padding-bottom: 0.3em;
+    margin-bottom: 0.45em;
+    border-bottom: 2px solid var(--rule);
+  }
+  .person h2 .count {
+    font-size: 0.7em;
+    font-weight: 400;
+    color: var(--dim);
+  }
+  .person.alldone h2 .count { color: var(--done); }
+
+  ul { list-style: none; }
+
+  li {
+    display: flex;
+    gap: 0.5em;
+    align-items: flex-start;
+    padding: 0.2em 0;
+  }
+
+  .box {
+    flex: 0 0 auto;
+    width: 0.85em;
+    height: 0.85em;
+    margin-top: 0.22em;
+    border: 2px solid var(--text);
+    border-radius: 0.2em;
+    position: relative;
+  }
+
+  .label { flex: 1 1 auto; min-width: 0; overflow-wrap: anywhere; }
+
+  .when {
+    display: block;
+    font-size: 0.7em;
+    color: var(--dim);
+  }
+  li.late .when { color: var(--late); font-weight: 600; }
+  li.late .box  { border-color: var(--late); }
+
+  li.done { color: var(--dim); }
+  li.done .title { text-decoration: line-through; }
+  li.done .box {
+    border-color: var(--done);
+    background: var(--done);
+  }
+  li.done .box::after {
+    content: "";
+    position: absolute;
+    left: 22%;
+    top: 2%;
+    width: 30%;
+    height: 62%;
+    border: solid #10241a;
+    border-width: 0 0.14em 0.14em 0;
+    transform: rotate(45deg);
+  }
+
+  .empty { color: var(--dim); font-style: italic; padding: 0.2em 0; }
+</style>
+</head>
+<body>
+
+<div id="board"></div>
+
+<script>
+(function () {
+  var REFRESH_MS = 5 * 60 * 1000;   // re-read todos.json every 5 minutes
+  var board = document.getElementById("board");
+
+  // Optional per-screen overrides: todos.html?cols=2&size=28
+  var params = new URLSearchParams(location.search);
+  var cols = parseInt(params.get("cols"), 10);
+  var size = parseInt(params.get("size"), 10);
+  if (cols > 0) document.documentElement.style.setProperty("--cols", cols);
+  if (size > 0) document.documentElement.style.setProperty("--base", size + "px");
+
+  function pad(n) { return (n < 10 ? "0" : "") + n; }
+
+  function todayKey() {
+    var d = new Date();
+    return d.getFullYear() + "-" + pad(d.getMonth() + 1) + "-" + pad(d.getDate());
+  }
+
+  function clock(hhmm) {
+    var parts = hhmm.split(":");
+    var h = parseInt(parts[0], 10);
+    var suffix = h >= 12 ? "PM" : "AM";
+    h = h % 12 || 12;
+    return h + ":" + parts[1] + " " + suffix;
+  }
+
+  // Returns { text, late } for an open item's due value
+  function dueLabel(due, today) {
+    if (!due) return null;
+    var day = due.slice(0, 10);
+    var time = due.length > 10 ? due.slice(11, 16) : null;
+
+    if (day < today) return { text: "Overdue", late: true };
+    if (!time) return null;                       // due today, no time — nothing to add
+
+    var now = new Date();
+    var nowHHMM = pad(now.getHours()) + ":" + pad(now.getMinutes());
+    return { text: "by " + clock(time), late: time < nowHHMM };
+  }
+
+  function el(tag, cls, text) {
+    var node = document.createElement(tag);
+    if (cls) node.className = cls;
+    if (text !== undefined) node.textContent = text;
+    return node;
+  }
+
+  function item(title, cls, whenText) {
+    var li = el("li", cls);
+    li.appendChild(el("span", "box"));
+    var label = el("span", "label");
+    label.appendChild(el("span", "title", title));
+    if (whenText) label.appendChild(el("span", "when", whenText));
+    li.appendChild(label);
+    return li;
+  }
+
+  function render(data) {
+    var today = todayKey();
+    board.textContent = "";
+
+    (data.people || []).forEach(function (person) {
+      var open = person.open || [];
+      // Drop anything finished before today, in case the Mac slept through midnight
+      var done = (person.done || []).filter(function (d) {
+        return (d.completed_at || "").slice(0, 10) === today;
+      });
+
+      var section = el("section", "person");
+      var total = open.length + done.length;
+      if (total > 0 && open.length === 0) section.classList.add("alldone");
+
+      var heading = el("h2");
+      heading.appendChild(el("span", "", person.name));
+      heading.appendChild(el("span", "count",
+        person.missing ? "" :
+        total === 0 ? "" :
+        open.length === 0 ? "All done" :
+        done.length + " of " + total));
+      section.appendChild(heading);
+
+      if (person.missing) {
+        section.appendChild(el("div", "empty", "List not found: " + person.list));
+      } else if (total === 0) {
+        section.appendChild(el("div", "empty", "Nothing today"));
+      } else {
+        var list = el("ul");
+        open.forEach(function (o) {
+          var due = dueLabel(o.due, today);
+          list.appendChild(item(o.title, due && due.late ? "late" : "", due ? due.text : ""));
+        });
+        done.forEach(function (d) {
+          list.appendChild(item(d.title, "done", ""));
+        });
+        section.appendChild(list);
+      }
+
+      board.appendChild(section);
+    });
+  }
+
+  function load() {
+    fetch("todos.json?t=" + Date.now(), { cache: "no-store" })
+      .then(function (response) { return response.json(); })
+      .then(render)
+      .catch(function () { /* keep showing the last good board */ });
+  }
+
+  load();
+  setInterval(load, REFRESH_MS);
+})();
+</script>
+
+</body>
+</html>
