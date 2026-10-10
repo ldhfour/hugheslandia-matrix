@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-10T11:16",
+  "generated_at": "2026-10-10T11:31",
   "date": "2026-10-10",
   "people": [
     {
@@ -11,42 +11,51 @@
           "due": null
         },
         {
-          "title": "Dresser Drawers closed",
-          "due": null
-        },
-        {
           "title": "Trash and Recycle Out",
-          "due": null
-        },
-        {
-          "title": "Clothes off floor",
           "due": null
         }
       ],
-      "done": []
+      "done": [
+        {
+          "title": "Clothes off floor",
+          "completed_at": "2026-10-10T11:26"
+        },
+        {
+          "title": "Dresser Drawers closed",
+          "completed_at": "2026-10-10T11:26"
+        },
+        {
+          "title": "School Uniforms Cleaned",
+          "completed_at": "2026-10-10T11:26"
+        },
+        {
+          "title": "School Uniforms Cleaned",
+          "completed_at": "2026-10-10T11:27"
+        },
+        {
+          "title": "School Uniforms Cleaned",
+          "completed_at": "2026-10-10T11:27"
+        },
+        {
+          "title": "School Uniforms Cleaned",
+          "completed_at": "2026-10-10T11:27"
+        },
+        {
+          "title": "School Uniforms Cleaned",
+          "completed_at": "2026-10-10T11:27"
+        },
+        {
+          "title": "School Uniforms Cleaned",
+          "completed_at": "2026-10-10T11:27"
+        }
+      ]
     },
     {
       "name": "Lowry",
       "list": "LDH5 CHORES",
       "open": [
         {
-          "title": "Clothes in Laundry Basket",
-          "due": null
-        },
-        {
-          "title": "Change Sheets",
-          "due": null
-        },
-        {
           "title": "Unload Dishwasher",
-          "due": null
-        },
-        {
-          "title": "Bathroom Floor",
-          "due": null
-        },
-        {
-          "title": "Dishes and Trash on Desk",
           "due": null
         },
         {
@@ -54,7 +63,24 @@
           "due": null
         }
       ],
-      "done": []
+      "done": [
+        {
+          "title": "Change Sheets",
+          "completed_at": "2026-10-10T11:20"
+        },
+        {
+          "title": "Clothes in Laundry Basket",
+          "completed_at": "2026-10-10T11:22"
+        },
+        {
+          "title": "Bathroom Floor",
+          "completed_at": "2026-10-10T11:24"
+        },
+        {
+          "title": "Dishes and Trash on Desk",
+          "completed_at": "2026-10-10T11:24"
+        }
+      ]
     },
     {
       "name": "Kelly",
@@ -72,19 +98,16 @@
       "list": "LDH4 Chores",
       "open": [
         {
-          "title": "Soccer Uniforms Ready for weekend",
-          "due": "2026-10-09"
-        },
-        {
           "title": "UK Visa",
-          "due": null
-        },
-        {
-          "title": "Pick-up Kelly Rx",
           "due": null
         }
       ],
-      "done": []
+      "done": [
+        {
+          "title": "Pick-up Kelly Rx",
+          "completed_at": "2026-10-10T11:16"
+        }
+      ]
     }
   ]
 }
