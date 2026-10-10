@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-10T00:01",
+  "generated_at": "2026-10-10T11:16",
   "date": "2026-10-10",
   "people": [
     {
@@ -7,11 +7,19 @@
       "list": "HHH CHORES",
       "open": [
         {
-          "title": "Clothes Off Floor",
+          "title": "UK Visa",
           "due": null
         },
         {
           "title": "Dresser Drawers closed",
+          "due": null
+        },
+        {
+          "title": "Trash and Recycle Out",
+          "due": null
+        },
+        {
+          "title": "Clothes off floor",
           "due": null
         }
       ],
@@ -39,6 +47,10 @@
         },
         {
           "title": "Dishes and Trash on Desk",
+          "due": null
+        },
+        {
+          "title": "UK Visa",
           "due": null
         }
       ],
