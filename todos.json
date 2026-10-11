@@ -1,11 +1,15 @@
 {
-  "generated_at": "2026-10-10T18:46",
-  "date": "2026-10-10",
+  "generated_at": "2026-10-11T00:01",
+  "date": "2026-10-11",
   "people": [
     {
       "name": "Hadley",
       "list": "HHH CHORES",
       "open": [
+        {
+          "title": "School Uniforms Cleaned",
+          "due": "2026-10-11"
+        },
         {
           "title": "UK Visa",
           "due": null
@@ -19,40 +23,7 @@
           "due": null
         }
       ],
-      "done": [
-        {
-          "title": "Clothes off floor",
-          "completed_at": "2026-10-10T11:26"
-        },
-        {
-          "title": "Dresser Drawers closed",
-          "completed_at": "2026-10-10T11:26"
-        },
-        {
-          "title": "School Uniforms Cleaned",
-          "completed_at": "2026-10-10T11:26"
-        },
-        {
-          "title": "School Uniforms Cleaned",
-          "completed_at": "2026-10-10T11:27"
-        },
-        {
-          "title": "School Uniforms Cleaned",
-          "completed_at": "2026-10-10T11:27"
-        },
-        {
-          "title": "School Uniforms Cleaned",
-          "completed_at": "2026-10-10T11:27"
-        },
-        {
-          "title": "School Uniforms Cleaned",
-          "completed_at": "2026-10-10T11:27"
-        },
-        {
-          "title": "School Uniforms Cleaned",
-          "completed_at": "2026-10-10T11:27"
-        }
-      ]
+      "done": []
     },
     {
       "name": "Lowry",
@@ -67,24 +38,7 @@
           "due": null
         }
       ],
-      "done": [
-        {
-          "title": "Change Sheets",
-          "completed_at": "2026-10-10T11:20"
-        },
-        {
-          "title": "Clothes in Laundry Basket",
-          "completed_at": "2026-10-10T11:22"
-        },
-        {
-          "title": "Bathroom Floor",
-          "completed_at": "2026-10-10T11:24"
-        },
-        {
-          "title": "Dishes and Trash on Desk",
-          "completed_at": "2026-10-10T11:24"
-        }
-      ]
+      "done": []
     },
     {
       "name": "Kelly",
@@ -106,12 +60,7 @@
           "due": null
         }
       ],
-      "done": [
-        {
-          "title": "Pick-up Kelly Rx",
-          "completed_at": "2026-10-10T11:16"
-        }
-      ]
+      "done": []
     }
   ]
 }
