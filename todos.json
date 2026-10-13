@@ -1,15 +1,11 @@
 {
-  "generated_at": "2026-10-13T00:11",
+  "generated_at": "2026-10-13T15:41",
   "date": "2026-10-13",
   "people": [
     {
       "name": "Hadley",
       "list": "HHH CHORES",
       "open": [
-        {
-          "title": "School Uniforms Cleaned",
-          "due": "2026-10-11"
-        },
         {
           "title": "UK Visa",
           "due": null
@@ -23,7 +19,12 @@
           "due": null
         }
       ],
-      "done": []
+      "done": [
+        {
+          "title": "School Uniforms Cleaned",
+          "completed_at": "2026-10-13T15:32"
+        }
+      ]
     },
     {
       "name": "Lowry",
@@ -35,6 +36,14 @@
         },
         {
           "title": "UK Visa",
+          "due": null
+        },
+        {
+          "title": "Trash Cans",
+          "due": null
+        },
+        {
+          "title": "Laundry to laundry room",
           "due": null
         }
       ],
