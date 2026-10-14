@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-10-13T15:41",
-  "date": "2026-10-13",
+  "generated_at": "2026-10-14T00:12",
+  "date": "2026-10-14",
   "people": [
     {
       "name": "Hadley",
@@ -19,12 +19,7 @@
           "due": null
         }
       ],
-      "done": [
-        {
-          "title": "School Uniforms Cleaned",
-          "completed_at": "2026-10-13T15:32"
-        }
-      ]
+      "done": []
     },
     {
       "name": "Lowry",
