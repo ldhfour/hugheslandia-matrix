@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-17T00:07",
+  "generated_at": "2026-10-17T09:22",
   "date": "2026-10-17",
   "people": [
     {
@@ -7,42 +7,84 @@
       "list": "HHH CHORES",
       "open": [
         {
-          "title": "UK Visa",
+          "title": "School Uniforms Cleaned",
+          "due": "2026-10-17"
+        },
+        {
+          "title": "Room cleaned",
           "due": null
         },
         {
-          "title": "Trash and Recycle Out",
+          "title": "Have fun at Amelia\u2019s",
           "due": null
         },
         {
-          "title": "New Reminder",
+          "title": "Homework",
           "due": null
         }
       ],
-      "done": []
+      "done": [
+        {
+          "title": "UK Visa",
+          "completed_at": "2026-10-17T09:14"
+        },
+        {
+          "title": "Trash and Recycle Out",
+          "completed_at": "2026-10-17T09:14"
+        },
+        {
+          "title": "New Reminder",
+          "completed_at": "2026-10-17T09:14"
+        },
+        {
+          "title": "School Uniforms Cleaned",
+          "completed_at": "2026-10-17T09:14"
+        },
+        {
+          "title": "School Uniforms Cleaned",
+          "completed_at": "2026-10-17T09:17"
+        }
+      ]
     },
     {
       "name": "Lowry",
       "list": "LDH5 CHORES",
       "open": [
         {
-          "title": "Unload Dishwasher",
-          "due": null
-        },
-        {
-          "title": "UK Visa",
-          "due": null
-        },
-        {
-          "title": "Trash Cans",
-          "due": null
-        },
-        {
           "title": "Laundry to laundry room",
+          "due": null
+        },
+        {
+          "title": "PE/DME laundry",
+          "due": null
+        },
+        {
+          "title": "Garage locker area picked up",
+          "due": null
+        },
+        {
+          "title": "Crush IMG",
+          "due": null
+        },
+        {
+          "title": "Homework",
           "due": null
         }
       ],
-      "done": []
+      "done": [
+        {
+          "title": "UK Visa",
+          "completed_at": "2026-10-17T09:14"
+        },
+        {
+          "title": "Unload Dishwasher",
+          "completed_at": "2026-10-17T09:14"
+        },
+        {
+          "title": "Trash Cans",
+          "completed_at": "2026-10-17T09:14"
+        }
+      ]
     },
     {
       "name": "Kelly",
@@ -60,11 +102,32 @@
       "list": "LDH4 Chores",
       "open": [
         {
-          "title": "UK Visa",
+          "title": "Logistics Plan for This Week",
+          "due": null
+        },
+        {
+          "title": "Kelly dental Insurance",
+          "due": null
+        },
+        {
+          "title": "Kelly new Doc",
+          "due": null
+        },
+        {
+          "title": "Schwab Financial Applintment",
+          "due": null
+        },
+        {
+          "title": "Shells - Driveway and Backyard",
           "due": null
         }
       ],
-      "done": []
+      "done": [
+        {
+          "title": "UK Visa",
+          "completed_at": "2026-10-17T09:18"
+        }
+      ]
     }
   ]
 }
