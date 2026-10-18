@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-18T00:07",
+  "generated_at": "2026-10-18T11:52",
   "date": "2026-10-18",
   "people": [
     {
@@ -38,15 +38,16 @@
           "due": null
         },
         {
-          "title": "Crush IMG",
-          "due": null
-        },
-        {
           "title": "Homework",
           "due": null
         }
       ],
-      "done": []
+      "done": [
+        {
+          "title": "Crush IMG",
+          "completed_at": "2026-10-18T11:36"
+        }
+      ]
     },
     {
       "name": "Kelly",
