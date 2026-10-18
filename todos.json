@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-18T12:52",
+  "generated_at": "2026-10-18T13:22",
   "date": "2026-10-18",
   "people": [
     {
@@ -7,15 +7,7 @@
       "list": "HHH CHORES",
       "open": [
         {
-          "title": "School Uniforms Cleaned",
-          "due": "2026-10-17"
-        },
-        {
           "title": "Room cleaned",
-          "due": null
-        },
-        {
-          "title": "Have fun at Amelia\u2019s",
           "due": null
         },
         {
@@ -23,7 +15,20 @@
           "due": null
         }
       ],
-      "done": []
+      "done": [
+        {
+          "title": "School Uniforms Cleaned",
+          "completed_at": "2026-10-18T13:17"
+        },
+        {
+          "title": "School Uniforms Cleaned",
+          "completed_at": "2026-10-18T13:17"
+        },
+        {
+          "title": "Have fun at Amelia\u2019s",
+          "completed_at": "2026-10-18T13:17"
+        }
+      ]
     },
     {
       "name": "Lowry",
