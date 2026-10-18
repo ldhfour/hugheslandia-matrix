@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-10-17T10:22",
-  "date": "2026-10-17",
+  "generated_at": "2026-10-18T00:07",
+  "date": "2026-10-18",
   "people": [
     {
       "name": "Hadley",
@@ -23,28 +23,7 @@
           "due": null
         }
       ],
-      "done": [
-        {
-          "title": "UK Visa",
-          "completed_at": "2026-10-17T09:14"
-        },
-        {
-          "title": "Trash and Recycle Out",
-          "completed_at": "2026-10-17T09:14"
-        },
-        {
-          "title": "New Reminder",
-          "completed_at": "2026-10-17T09:14"
-        },
-        {
-          "title": "School Uniforms Cleaned",
-          "completed_at": "2026-10-17T09:14"
-        },
-        {
-          "title": "School Uniforms Cleaned",
-          "completed_at": "2026-10-17T09:17"
-        }
-      ]
+      "done": []
     },
     {
       "name": "Lowry",
@@ -67,24 +46,7 @@
           "due": null
         }
       ],
-      "done": [
-        {
-          "title": "UK Visa",
-          "completed_at": "2026-10-17T09:14"
-        },
-        {
-          "title": "Unload Dishwasher",
-          "completed_at": "2026-10-17T09:14"
-        },
-        {
-          "title": "Trash Cans",
-          "completed_at": "2026-10-17T09:14"
-        },
-        {
-          "title": "Laundry to laundry room",
-          "completed_at": "2026-10-17T10:17"
-        }
-      ]
+      "done": []
     },
     {
       "name": "Kelly",
@@ -134,12 +96,7 @@
           "due": null
         }
       ],
-      "done": [
-        {
-          "title": "UK Visa",
-          "completed_at": "2026-10-17T09:18"
-        }
-      ]
+      "done": []
     }
   ]
 }
