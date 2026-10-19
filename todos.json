@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-10-18T13:22",
-  "date": "2026-10-18",
+  "generated_at": "2026-10-19T00:07",
+  "date": "2026-10-19",
   "people": [
     {
       "name": "Hadley",
@@ -15,20 +15,7 @@
           "due": null
         }
       ],
-      "done": [
-        {
-          "title": "School Uniforms Cleaned",
-          "completed_at": "2026-10-18T13:17"
-        },
-        {
-          "title": "School Uniforms Cleaned",
-          "completed_at": "2026-10-18T13:17"
-        },
-        {
-          "title": "Have fun at Amelia\u2019s",
-          "completed_at": "2026-10-18T13:17"
-        }
-      ]
+      "done": []
     },
     {
       "name": "Lowry",
@@ -47,12 +34,7 @@
           "due": null
         }
       ],
-      "done": [
-        {
-          "title": "Crush IMG",
-          "completed_at": "2026-10-18T11:36"
-        }
-      ]
+      "done": []
     },
     {
       "name": "Kelly",
