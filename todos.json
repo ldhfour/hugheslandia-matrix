@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-23T00:59",
+  "generated_at": "2026-10-23T07:28",
   "date": "2026-10-23",
   "people": [
     {
@@ -20,20 +20,7 @@
     {
       "name": "Lowry",
       "list": "LDH5 CHORES",
-      "open": [
-        {
-          "title": "PE/DME laundry",
-          "due": null
-        },
-        {
-          "title": "Garage locker area picked up",
-          "due": null
-        },
-        {
-          "title": "Homework",
-          "due": null
-        }
-      ],
+      "open": [],
       "done": []
     },
     {
