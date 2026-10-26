@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-26T03:59",
+  "generated_at": "2026-10-26T14:26",
   "date": "2026-10-26",
   "people": [
     {
@@ -7,24 +7,50 @@
       "list": "HHH CHORES",
       "open": [
         {
-          "title": "School Uniforms Cleaned",
-          "due": "2026-10-24"
-        },
-        {
           "title": "Room cleaned",
           "due": null
         },
         {
           "title": "Homework",
           "due": null
+        },
+        {
+          "title": "Bathroom",
+          "due": null
         }
       ],
-      "done": []
+      "done": [
+        {
+          "title": "School Uniforms Cleaned",
+          "completed_at": "2026-10-26T14:18"
+        }
+      ]
     },
     {
       "name": "Lowry",
       "list": "LDH5 CHORES",
-      "open": [],
+      "open": [
+        {
+          "title": "Room Cleaned",
+          "due": null
+        },
+        {
+          "title": "Laundry Started",
+          "due": null
+        },
+        {
+          "title": "Pick up Garage Trash",
+          "due": null
+        },
+        {
+          "title": "Take out Trash",
+          "due": null
+        },
+        {
+          "title": "Bathroom",
+          "due": null
+        }
+      ],
       "done": []
     },
     {
@@ -32,18 +58,23 @@
       "list": "KLB To Do",
       "open": [
         {
-          "title": "UK Visa",
+          "title": "Fill Out Ballot",
           "due": null
         }
       ],
-      "done": []
+      "done": [
+        {
+          "title": "UK Visa",
+          "completed_at": "2026-10-26T14:17"
+        }
+      ]
     },
     {
       "name": "Dawson",
       "list": "LDH4 Chores",
       "open": [
         {
-          "title": "Logistics Plan for This Week",
+          "title": "Fill Out Ballot",
           "due": null
         },
         {
@@ -75,11 +106,20 @@
           "due": null
         },
         {
-          "title": "Sam\u2019s Xmas pre order",
+          "title": "Pick Up Rx @Publix",
+          "due": null
+        },
+        {
+          "title": "Wash Posh",
           "due": null
         }
       ],
-      "done": []
+      "done": [
+        {
+          "title": "Sam\u2019s Xmas pre order",
+          "completed_at": "2026-10-26T14:17"
+        }
+      ]
     }
   ]
 }
