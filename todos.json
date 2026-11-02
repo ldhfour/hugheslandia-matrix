@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-02T07:42",
+  "generated_at": "2026-11-02T15:42",
   "date": "2026-11-02",
   "people": [
     {
@@ -9,20 +9,20 @@
         {
           "title": "Room cleaned",
           "due": null
-        },
-        {
-          "title": "Homework",
-          "due": null
-        },
-        {
-          "title": "Bathroom",
-          "due": null
         }
       ],
       "done": [
         {
           "title": "School Uniforms Cleaned",
           "completed_at": "2026-11-02T07:14"
+        },
+        {
+          "title": "Homework",
+          "completed_at": "2026-11-02T15:35"
+        },
+        {
+          "title": "Bathroom",
+          "completed_at": "2026-11-02T15:37"
         }
       ]
     },
