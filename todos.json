@@ -1,15 +1,11 @@
 {
-  "generated_at": "2026-11-02T02:15",
+  "generated_at": "2026-11-02T07:27",
   "date": "2026-11-02",
   "people": [
     {
       "name": "Hadley",
       "list": "HHH CHORES",
       "open": [
-        {
-          "title": "School Uniforms Cleaned",
-          "due": "2026-10-31"
-        },
         {
           "title": "Room cleaned",
           "due": null
@@ -23,7 +19,12 @@
           "due": null
         }
       ],
-      "done": []
+      "done": [
+        {
+          "title": "School Uniforms Cleaned",
+          "completed_at": "2026-11-02T07:14"
+        }
+      ]
     },
     {
       "name": "Lowry",
@@ -31,14 +32,6 @@
       "open": [
         {
           "title": "Room Cleaned",
-          "due": null
-        },
-        {
-          "title": "Laundry Started",
-          "due": null
-        },
-        {
-          "title": "Pick up Garage Trash",
           "due": null
         },
         {
@@ -50,27 +43,37 @@
           "due": null
         }
       ],
-      "done": []
+      "done": [
+        {
+          "title": "Laundry Started",
+          "completed_at": "2026-11-02T07:15"
+        },
+        {
+          "title": "Pick up Garage Trash",
+          "completed_at": "2026-11-02T07:15"
+        }
+      ]
     },
     {
       "name": "Kelly",
       "list": "KLB To Do",
       "open": [
         {
-          "title": "Fill Out Ballot",
+          "title": "Check for St Augustine",
           "due": null
         }
       ],
-      "done": []
+      "done": [
+        {
+          "title": "Fill Out Ballot",
+          "completed_at": "2026-11-02T07:15"
+        }
+      ]
     },
     {
       "name": "Dawson",
       "list": "LDH4 Chores",
       "open": [
-        {
-          "title": "Fill Out Ballot",
-          "due": null
-        },
         {
           "title": "Kelly dental Insurance",
           "due": null
@@ -98,17 +101,22 @@
         {
           "title": "Cut Lawn",
           "due": null
+        }
+      ],
+      "done": [
+        {
+          "title": "Fill Out Ballot",
+          "completed_at": "2026-11-02T07:15"
         },
         {
           "title": "Pick Up Rx @Publix",
-          "due": null
+          "completed_at": "2026-11-02T07:15"
         },
         {
           "title": "Wash Posh",
-          "due": null
+          "completed_at": "2026-11-02T07:15"
         }
-      ],
-      "done": []
+      ]
     }
   ]
 }
