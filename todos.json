@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-02T07:27",
+  "generated_at": "2026-11-02T07:42",
   "date": "2026-11-02",
   "people": [
     {
@@ -60,6 +60,10 @@
       "open": [
         {
           "title": "Check for St Augustine",
+          "due": null
+        },
+        {
+          "title": "Remove Spond Calendar Sync",
           "due": null
         }
       ],
