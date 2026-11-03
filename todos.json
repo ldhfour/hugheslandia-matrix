@@ -1,29 +1,12 @@
 {
-  "generated_at": "2026-11-02T15:57",
-  "date": "2026-11-02",
+  "generated_at": "2026-11-03T00:12",
+  "date": "2026-11-03",
   "people": [
     {
       "name": "Hadley",
       "list": "HHH CHORES",
       "open": [],
-      "done": [
-        {
-          "title": "School Uniforms Cleaned",
-          "completed_at": "2026-11-02T07:14"
-        },
-        {
-          "title": "Homework",
-          "completed_at": "2026-11-02T15:35"
-        },
-        {
-          "title": "Bathroom",
-          "completed_at": "2026-11-02T15:37"
-        },
-        {
-          "title": "Room cleaned",
-          "completed_at": "2026-11-02T15:45"
-        }
-      ]
+      "done": []
     },
     {
       "name": "Lowry",
@@ -42,16 +25,7 @@
           "due": null
         }
       ],
-      "done": [
-        {
-          "title": "Laundry Started",
-          "completed_at": "2026-11-02T07:15"
-        },
-        {
-          "title": "Pick up Garage Trash",
-          "completed_at": "2026-11-02T07:15"
-        }
-      ]
+      "done": []
     },
     {
       "name": "Kelly",
@@ -66,12 +40,7 @@
           "due": null
         }
       ],
-      "done": [
-        {
-          "title": "Fill Out Ballot",
-          "completed_at": "2026-11-02T07:15"
-        }
-      ]
+      "done": []
     },
     {
       "name": "Dawson",
@@ -106,20 +75,7 @@
           "due": null
         }
       ],
-      "done": [
-        {
-          "title": "Fill Out Ballot",
-          "completed_at": "2026-11-02T07:15"
-        },
-        {
-          "title": "Pick Up Rx @Publix",
-          "completed_at": "2026-11-02T07:15"
-        },
-        {
-          "title": "Wash Posh",
-          "completed_at": "2026-11-02T07:15"
-        }
-      ]
+      "done": []
     }
   ]
 }
