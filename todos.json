@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-11-06T05:38",
-  "date": "2026-11-06",
+  "generated_at": "2026-11-07T00:03",
+  "date": "2026-11-07",
   "people": [
     {
       "name": "Hadley",
@@ -9,6 +9,10 @@
         {
           "title": "School Uniforms Cleaned",
           "due": "2026-11-04"
+        },
+        {
+          "title": "School Uniforms Cleaned",
+          "due": "2026-11-07"
         }
       ],
       "done": []
