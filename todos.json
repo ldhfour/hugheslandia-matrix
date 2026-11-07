@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-07T10:19",
+  "generated_at": "2026-11-07T10:49",
   "date": "2026-11-07",
   "people": [
     {
@@ -24,6 +24,10 @@
         },
         {
           "title": "Deflate pumpkin blowups.",
+          "due": null
+        },
+        {
+          "title": "Vacuum - tell dad to run Rosie when done.",
           "due": null
         }
       ],
