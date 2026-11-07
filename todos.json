@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-07T11:04",
+  "generated_at": "2026-11-07T11:19",
   "date": "2026-11-07",
   "people": [
     {
@@ -19,10 +19,6 @@
           "due": null
         },
         {
-          "title": "Deflate pumpkin blowups.",
-          "due": null
-        },
-        {
           "title": "Vacuum - tell dad to run Rosie when done.",
           "due": null
         }
@@ -31,6 +27,10 @@
         {
           "title": "Wipe down kitchen counters with spray",
           "completed_at": "2026-11-07T10:55"
+        },
+        {
+          "title": "Deflate pumpkin blowups.",
+          "completed_at": "2026-11-07T11:12"
         }
       ]
     },
