@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-08T06:49",
+  "generated_at": "2026-11-08T10:19",
   "date": "2026-11-08",
   "people": [
     {
@@ -19,15 +19,16 @@
           "due": null
         },
         {
-          "title": "Vacuum - tell dad to run Rosie when done.",
-          "due": null
-        },
-        {
           "title": "CLEAN YOUR ROOM!!!!!!!!!!!!",
           "due": null
         }
       ],
-      "done": []
+      "done": [
+        {
+          "title": "Vacuum - tell dad to run Rosie when done.",
+          "completed_at": "2026-11-08T10:13"
+        }
+      ]
     },
     {
       "name": "Lowry",
