@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-08T00:04",
+  "generated_at": "2026-11-08T06:49",
   "date": "2026-11-08",
   "people": [
     {
@@ -21,6 +21,10 @@
         {
           "title": "Vacuum - tell dad to run Rosie when done.",
           "due": null
+        },
+        {
+          "title": "CLEAN YOUR ROOM!!!!!!!!!!!!",
+          "due": null
         }
       ],
       "done": []
@@ -30,7 +34,7 @@
       "list": "LDH5 CHORES",
       "open": [
         {
-          "title": "Room Cleaned",
+          "title": "CLEAN YOUR ROOM!!!!!!!",
           "due": null
         },
         {
