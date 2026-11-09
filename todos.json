@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-09T16:19",
+  "generated_at": "2026-11-09T18:49",
   "date": "2026-11-09",
   "people": [
     {
@@ -52,10 +52,6 @@
       ],
       "done": [
         {
-          "title": "Fold & Put away laundry",
-          "completed_at": "2026-11-09T15:44"
-        },
-        {
           "title": "CLEAN YOUR ROOM!!!!!!!",
           "completed_at": "2026-11-09T16:15"
         },
@@ -69,6 +65,10 @@
         },
         {
           "title": "Recycle",
+          "completed_at": "2026-11-09T16:15"
+        },
+        {
+          "title": "Fold & Put away laundry",
           "completed_at": "2026-11-09T16:15"
         }
       ]
