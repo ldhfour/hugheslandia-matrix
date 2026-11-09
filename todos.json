@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-11-08T10:19",
-  "date": "2026-11-08",
+  "generated_at": "2026-11-09T00:04",
+  "date": "2026-11-09",
   "people": [
     {
       "name": "Hadley",
@@ -23,12 +23,7 @@
           "due": null
         }
       ],
-      "done": [
-        {
-          "title": "Vacuum - tell dad to run Rosie when done.",
-          "completed_at": "2026-11-08T10:13"
-        }
-      ]
+      "done": []
     },
     {
       "name": "Lowry",
