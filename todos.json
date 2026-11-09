@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-09T00:04",
+  "generated_at": "2026-11-09T15:49",
   "date": "2026-11-09",
   "people": [
     {
@@ -7,23 +7,32 @@
       "list": "HHH CHORES",
       "open": [
         {
-          "title": "School Uniforms Cleaned",
-          "due": "2026-11-04"
-        },
-        {
-          "title": "School Uniforms Cleaned",
-          "due": "2026-11-07"
-        },
-        {
-          "title": "Unload dishwasher",
+          "title": "Deposit checks",
           "due": null
         },
         {
-          "title": "CLEAN YOUR ROOM!!!!!!!!!!!!",
+          "title": "Text GMA what you want for xmas",
           "due": null
         }
       ],
-      "done": []
+      "done": [
+        {
+          "title": "School Uniforms Cleaned",
+          "completed_at": "2026-11-09T15:44"
+        },
+        {
+          "title": "School Uniforms Cleaned",
+          "completed_at": "2026-11-09T15:44"
+        },
+        {
+          "title": "Unload dishwasher",
+          "completed_at": "2026-11-09T15:44"
+        },
+        {
+          "title": "CLEAN YOUR ROOM!!!!!!!!!!!!",
+          "completed_at": "2026-11-09T15:44"
+        }
+      ]
     },
     {
       "name": "Lowry",
@@ -42,15 +51,28 @@
           "due": null
         },
         {
-          "title": "Fold & Put away laundry",
+          "title": "Recycle",
           "due": null
         },
         {
-          "title": "Recycle",
+          "title": "Deposit checks",
+          "due": null
+        },
+        {
+          "title": "Tell GMA what you want to christmas",
+          "due": null
+        },
+        {
+          "title": "Soccer uniforms and practice stuff washed.",
           "due": null
         }
       ],
-      "done": []
+      "done": [
+        {
+          "title": "Fold & Put away laundry",
+          "completed_at": "2026-11-09T15:44"
+        }
+      ]
     },
     {
       "name": "Kelly",
