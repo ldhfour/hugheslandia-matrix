@@ -1,37 +1,12 @@
 {
-  "generated_at": "2026-11-09T18:49",
-  "date": "2026-11-09",
+  "generated_at": "2026-11-10T00:04",
+  "date": "2026-11-10",
   "people": [
     {
       "name": "Hadley",
       "list": "HHH CHORES",
       "open": [],
-      "done": [
-        {
-          "title": "School Uniforms Cleaned",
-          "completed_at": "2026-11-09T15:44"
-        },
-        {
-          "title": "School Uniforms Cleaned",
-          "completed_at": "2026-11-09T15:44"
-        },
-        {
-          "title": "Unload dishwasher",
-          "completed_at": "2026-11-09T15:44"
-        },
-        {
-          "title": "CLEAN YOUR ROOM!!!!!!!!!!!!",
-          "completed_at": "2026-11-09T15:44"
-        },
-        {
-          "title": "Deposit checks",
-          "completed_at": "2026-11-09T16:07"
-        },
-        {
-          "title": "Text GMA what you want for xmas",
-          "completed_at": "2026-11-09T16:15"
-        }
-      ]
+      "done": []
     },
     {
       "name": "Lowry",
@@ -50,28 +25,7 @@
           "due": null
         }
       ],
-      "done": [
-        {
-          "title": "CLEAN YOUR ROOM!!!!!!!",
-          "completed_at": "2026-11-09T16:15"
-        },
-        {
-          "title": "Bathroom",
-          "completed_at": "2026-11-09T16:15"
-        },
-        {
-          "title": "Take out Trash",
-          "completed_at": "2026-11-09T16:15"
-        },
-        {
-          "title": "Recycle",
-          "completed_at": "2026-11-09T16:15"
-        },
-        {
-          "title": "Fold & Put away laundry",
-          "completed_at": "2026-11-09T16:15"
-        }
-      ]
+      "done": []
     },
     {
       "name": "Kelly",
