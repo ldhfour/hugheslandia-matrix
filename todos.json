@@ -1,11 +1,16 @@
 {
-  "generated_at": "2026-11-10T00:04",
-  "date": "2026-11-10",
+  "generated_at": "2026-11-11T00:04",
+  "date": "2026-11-11",
   "people": [
     {
       "name": "Hadley",
       "list": "HHH CHORES",
-      "open": [],
+      "open": [
+        {
+          "title": "School Uniforms Cleaned",
+          "due": "2026-11-11"
+        }
+      ],
       "done": []
     },
     {
