@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-16T07:39",
+  "generated_at": "2026-11-16T07:54",
   "date": "2026-11-16",
   "people": [
     {
@@ -7,19 +7,40 @@
       "list": "HHH CHORES",
       "open": [
         {
-          "title": "School Uniforms Cleaned",
-          "due": "2026-11-11"
-        },
-        {
-          "title": "School Uniforms Cleaned",
-          "due": "2026-11-14"
-        },
-        {
           "title": "Homework",
+          "due": null
+        },
+        {
+          "title": "Math Lesson (do another one today regardless)",
+          "due": null
+        },
+        {
+          "title": "Room Floor clean",
+          "due": null
+        },
+        {
+          "title": "Bathroom",
+          "due": null
+        },
+        {
+          "title": "Help with one Big Joe",
+          "due": null
+        },
+        {
+          "title": "Tell GMA what you want for xmas",
           "due": null
         }
       ],
-      "done": []
+      "done": [
+        {
+          "title": "School Uniforms Cleaned",
+          "completed_at": "2026-11-16T07:40"
+        },
+        {
+          "title": "School Uniforms Cleaned",
+          "completed_at": "2026-11-16T07:40"
+        }
+      ]
     },
     {
       "name": "Lowry",
@@ -43,6 +64,10 @@
         },
         {
           "title": "All trash out to Ewing (today)",
+          "due": null
+        },
+        {
+          "title": "Help with one BIG Joe",
           "due": null
         }
       ],
