@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-16T00:09",
+  "generated_at": "2026-11-16T07:39",
   "date": "2026-11-16",
   "people": [
     {
@@ -13,6 +13,10 @@
         {
           "title": "School Uniforms Cleaned",
           "due": "2026-11-14"
+        },
+        {
+          "title": "Homework",
+          "due": null
         }
       ],
       "done": []
@@ -22,19 +26,32 @@
       "list": "LDH5 CHORES",
       "open": [
         {
-          "title": "Deposit checks",
-          "due": null
-        },
-        {
           "title": "Tell GMA what you want to christmas",
           "due": null
         },
         {
           "title": "Soccer uniforms and practice stuff washed.",
           "due": null
+        },
+        {
+          "title": "Homework",
+          "due": null
+        },
+        {
+          "title": "Room and Bathroom",
+          "due": null
+        },
+        {
+          "title": "All trash out to Ewing (today)",
+          "due": null
         }
       ],
-      "done": []
+      "done": [
+        {
+          "title": "Deposit checks",
+          "completed_at": "2026-11-16T07:38"
+        }
+      ]
     },
     {
       "name": "Kelly",
@@ -72,6 +89,14 @@
         },
         {
           "title": "Cut Lawn",
+          "due": null
+        },
+        {
+          "title": "Amazon Returns",
+          "due": null
+        },
+        {
+          "title": "Lowe\u2019s: Salt + front stuff",
           "due": null
         }
       ],
