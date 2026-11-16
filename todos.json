@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-16T08:39",
+  "generated_at": "2026-11-16T17:24",
   "date": "2026-11-16",
   "people": [
     {
@@ -55,10 +55,6 @@
           "due": null
         },
         {
-          "title": "Soccer uniforms and practice stuff washed.",
-          "due": null
-        },
-        {
           "title": "Homework",
           "due": null
         },
@@ -81,8 +77,12 @@
       ],
       "done": [
         {
+          "title": "Soccer uniforms and practice stuff washed.",
+          "completed_at": "2026-11-16T17:21"
+        },
+        {
           "title": "Deposit checks",
-          "completed_at": "2026-11-16T07:38"
+          "completed_at": "2026-11-16T17:21"
         }
       ]
     },
