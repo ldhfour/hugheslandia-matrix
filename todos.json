@@ -1,40 +1,11 @@
 {
-  "generated_at": "2026-11-16T17:24",
+  "generated_at": "2026-11-16T19:39",
   "date": "2026-11-16",
   "people": [
     {
       "name": "Hadley",
       "list": "HHH CHORES",
-      "open": [
-        {
-          "title": "Homework",
-          "due": null
-        },
-        {
-          "title": "Math Lesson (do another one today regardless)",
-          "due": null
-        },
-        {
-          "title": "Room Floor clean",
-          "due": null
-        },
-        {
-          "title": "Bathroom",
-          "due": null
-        },
-        {
-          "title": "Help with one Big Joe",
-          "due": null
-        },
-        {
-          "title": "Tell GMA what you want for xmas",
-          "due": null
-        },
-        {
-          "title": "Venice IB Sign Up",
-          "due": null
-        }
-      ],
+      "open": [],
       "done": [
         {
           "title": "School Uniforms Cleaned",
@@ -43,6 +14,30 @@
         {
           "title": "School Uniforms Cleaned",
           "completed_at": "2026-11-16T07:40"
+        },
+        {
+          "title": "Homework",
+          "completed_at": "2026-11-16T17:54"
+        },
+        {
+          "title": "Room Floor clean",
+          "completed_at": "2026-11-16T17:54"
+        },
+        {
+          "title": "Bathroom",
+          "completed_at": "2026-11-16T17:55"
+        },
+        {
+          "title": "Help with one Big Joe",
+          "completed_at": "2026-11-16T18:13"
+        },
+        {
+          "title": "Tell GMA what you want for xmas",
+          "completed_at": "2026-11-16T18:13"
+        },
+        {
+          "title": "Venice IB Sign Up",
+          "completed_at": "2026-11-16T18:25"
         }
       ]
     },
