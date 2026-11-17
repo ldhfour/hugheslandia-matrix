@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-16T19:39",
+  "generated_at": "2026-11-16T22:24",
   "date": "2026-11-16",
   "people": [
     {
@@ -54,19 +54,11 @@
           "due": null
         },
         {
-          "title": "Room and Bathroom",
-          "due": null
-        },
-        {
           "title": "All trash out to Ewing (today)",
           "due": null
         },
         {
-          "title": "Help with one BIG Joe",
-          "due": null
-        },
-        {
-          "title": "Venice IB sign up.",
+          "title": "Soccer Homework",
           "due": null
         }
       ],
@@ -78,6 +70,18 @@
         {
           "title": "Deposit checks",
           "completed_at": "2026-11-16T17:21"
+        },
+        {
+          "title": "Venice IB sign up.",
+          "completed_at": "2026-11-16T22:20"
+        },
+        {
+          "title": "Room and Bathroom",
+          "completed_at": "2026-11-16T22:20"
+        },
+        {
+          "title": "Help with one BIG Joe",
+          "completed_at": "2026-11-16T22:20"
         }
       ]
     },
