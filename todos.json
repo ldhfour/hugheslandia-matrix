@@ -1,45 +1,12 @@
 {
-  "generated_at": "2026-11-16T22:24",
-  "date": "2026-11-16",
+  "generated_at": "2026-11-17T00:09",
+  "date": "2026-11-17",
   "people": [
     {
       "name": "Hadley",
       "list": "HHH CHORES",
       "open": [],
-      "done": [
-        {
-          "title": "School Uniforms Cleaned",
-          "completed_at": "2026-11-16T07:40"
-        },
-        {
-          "title": "School Uniforms Cleaned",
-          "completed_at": "2026-11-16T07:40"
-        },
-        {
-          "title": "Homework",
-          "completed_at": "2026-11-16T17:54"
-        },
-        {
-          "title": "Room Floor clean",
-          "completed_at": "2026-11-16T17:54"
-        },
-        {
-          "title": "Bathroom",
-          "completed_at": "2026-11-16T17:55"
-        },
-        {
-          "title": "Help with one Big Joe",
-          "completed_at": "2026-11-16T18:13"
-        },
-        {
-          "title": "Tell GMA what you want for xmas",
-          "completed_at": "2026-11-16T18:13"
-        },
-        {
-          "title": "Venice IB Sign Up",
-          "completed_at": "2026-11-16T18:25"
-        }
-      ]
+      "done": []
     },
     {
       "name": "Lowry",
@@ -62,28 +29,7 @@
           "due": null
         }
       ],
-      "done": [
-        {
-          "title": "Soccer uniforms and practice stuff washed.",
-          "completed_at": "2026-11-16T17:21"
-        },
-        {
-          "title": "Deposit checks",
-          "completed_at": "2026-11-16T17:21"
-        },
-        {
-          "title": "Venice IB sign up.",
-          "completed_at": "2026-11-16T22:20"
-        },
-        {
-          "title": "Room and Bathroom",
-          "completed_at": "2026-11-16T22:20"
-        },
-        {
-          "title": "Help with one BIG Joe",
-          "completed_at": "2026-11-16T22:20"
-        }
-      ]
+      "done": []
     },
     {
       "name": "Kelly",
